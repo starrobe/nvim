@@ -1,7 +1,6 @@
 require "core.options"
 require "core.mappings"
 
-
 local diagnostic_signs = require("plugins.configs.icons").diagnostic
 for type, icon in pairs(diagnostic_signs) do
   local hl = "DiagnosticSign" .. type
