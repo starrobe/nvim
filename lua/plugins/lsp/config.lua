@@ -2,7 +2,6 @@ local M = {}
 
 M.servers = {
   "lua_ls",
-  "clangd",
   "pyright",
   "marksman",
 }
