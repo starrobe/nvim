@@ -14,7 +14,7 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+      { "folke/neodev.nvim", opts = {} },
       "mason.nvim",
       "mason-lspconfig.nvim",
     },
@@ -44,13 +44,17 @@ return {
     end,
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = function()
-      local nls = require("null-ls")
+      local null_ls = require("null-ls")
       return {
         sources = {
-          nls.builtins.formatting.clang_format,
+          null_ls.builtins.formatting.clang_format.with({
+            extra_args = {
+              "-style={BasedOnStyle: LLVM, IndentWidth: 4}"
+            }
+          })
         },
       }
     end,

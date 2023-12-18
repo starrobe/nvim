@@ -2,7 +2,7 @@ return {
   -- 自动括号
   {
     "windwp/nvim-autopairs",
-    event = "VeryLazy",
+    event = "InsertEnter",
     opts = {
       check_ts = true,
       ts_config = {
@@ -11,22 +11,41 @@ return {
         java = false,       -- don't check treesitter on java
       },
       fast_wrap = {
-        map = '<M-e>',
+        map = '<M-e>', -- <Alt-e>
         chars = { '{', '[', '(', '"', "'" },
         pattern = [=[[%'%"%>%]%)%}%,]]=],
         end_key = '$',
+        before_key = 'h',
+        after_key = 'l',
+        cursor_pos_before = true,
         keys = 'qwertyuiopzxcvbnmasdfghjkl',
-        check_comma = true,
+        manual_position = true,
         highlight = 'Search',
         highlight_grey = 'Comment'
       },
-    }
+    },
+    config = function(_, opts)
+      local npairs = require("nvim-autopairs")
+      local Rule = require("nvim-autopairs.rule")
+
+      npairs.setup(opts)
+
+      local ts_conds = require("nvim-autopairs.ts-conds")
+
+      -- press % ==> %% only while inside a comment or string
+      npairs.add_rules({
+        Rule("%", "%", "lua")
+            :with_pair(ts_conds.is_ts_node({ "string", "comment" })),
+        Rule("$", "$", "lua")
+            :with_pair(ts_conds.is_not_ts_node({ "function" }))
+      })
+    end
   },
 
   -- 注释
   {
     "numToStr/Comment.nvim",
-    config = true,
+    opts = {},
     keys = {
       {
         "<C-_>",
@@ -42,7 +61,7 @@ return {
             '<ESC>', true, false, true
           )
           vim.api.nvim_feedkeys(esc, 'nx', false)
-          require("Comment.api").toggle.linewise(vim.fn.visualmode())
+          require("Comment.api").toggle.blockwise(vim.fn.visualmode())
         end,
         mode = "x",
         desc = "注释选中的行"
@@ -53,50 +72,15 @@ return {
   -- 添加环绕符号如 "", '', (), {}等
   {
     "kylechui/nvim-surround",
-    config = true,
     event = "VeryLazy",
-  },
-
-  -- 跳转
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    config = true,
-    keys = {
-      {
-        "s",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash").jump()
-        end,
-        desc = "Flash",
-      },
-      {
-        "S",
-        mode = { "n", "o", "x" },
-        function()
-          require("flash").treesitter()
-        end,
-        desc = "Flash Treesitter",
-      },
-    },
+    opts = {},
   },
 
   -- 代码补全
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = {"InsertEnter", "CmdlineEnter"},
     dependencies = {
-      {
-        "L3MON4D3/LuaSnip",
-        build = "make install_jsregexp",
-        dependencies = {
-          "rafamadriz/friendly-snippets",
-          config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-          end,
-        },
-      },
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
@@ -106,5 +90,15 @@ return {
       local options = require("plugins.configs.nvim-cmp").config
       require("cmp").setup(options)
     end
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+      end,
+    },
   },
 }

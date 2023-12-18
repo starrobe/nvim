@@ -46,14 +46,31 @@ local location = function()
   return rhs
 end
 
+local format_sign = function()
+  return "%="
+end
+
 M.config = {
   options = {
     globalstatus = true,
   },
   sections = {
     lualine_a = { modified_sign },
-    lualine_b = {},
+    lualine_b = {
+    },
     lualine_c = {
+      {
+        "filename",
+        symbols = {
+          modified = "",
+          readonly = require("plugins.configs.icons").file.FileReadOnly
+        },
+        separator = "",
+      },
+      {
+        format_sign,
+        separator = "",
+      },
       {
         "diagnostics",
         symbols = {
@@ -63,13 +80,6 @@ M.config = {
           hint = diagnostic_icons.Hint .. " ",
         },
         separator = "",
-      },
-      {
-        "filename",
-        symbols = {
-          modified = "",
-          readonly = require("plugins.configs.icons").file.FileReadOnly
-        },
       },
     },
     lualine_x = {

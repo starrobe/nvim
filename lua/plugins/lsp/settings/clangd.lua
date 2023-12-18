@@ -5,6 +5,5 @@ return {
     "--clang-tidy",
     "--header-insertion=iwyu",
     "--completion-style=detailed",
-    "--fallback-style=llvm",
   },
 }

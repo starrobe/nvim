@@ -1,11 +1,9 @@
 return {
+  -- 文件树
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     cmd = "Neotree",
-    init = function()
-      vim.g.neo_tree_remove_legacy_commands = 1
-    end,
     opts = {
       close_if_last_window = true,
       enable_git_status = false,
@@ -15,6 +13,7 @@ return {
       { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle Neotree" }
     }
   },
+
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -34,7 +33,6 @@ return {
       defaults = {
         preview = false,
         layout_strategy = 'center',
-        border = true,
         sorting_strategy = "ascending",
       },
       pickers = {},
@@ -53,7 +51,7 @@ return {
       { "<leader>/",       "<cmd>Telescope live_grep<cr>",   desc = "Live Grep" },
       { "<leader>ff",      "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
       { "<leader>fg",      "<cmd>Telescope live_grep<cr>",   desc = "Live Grep" },
-      { "<leader>fs",      "<cmd>Telescope grep_string<cr>", desc = "Grep String" },
+      { "<leader>fs",      "<cmd>Telescope grep_string<cr>", desc = "Grep Current String" },
       -- Vim Pickers
       { "<leader>fb",      "<cmd>Telescope buffers<cr>",     desc = "Find Buffers" },
       { "<leader>fh",      "<cmd>Telescope help_tags<cr>",   desc = "Find Helps" },
@@ -64,11 +62,8 @@ return {
       { "<leader>fn",      "<cmd>Telescope notify<cr>",      desc = "Notifications" }
     },
   },
-  {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = true,
-  },
+
+  -- 终端
   {
     "akinsho/toggleterm.nvim",
     version = "*",
@@ -84,6 +79,8 @@ return {
       }
     }
   },
+
+  -- Diagnostics列表
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
@@ -94,10 +91,9 @@ return {
   },
   {
     "folke/todo-comments.nvim",
-    dependencies = { "plenary.nvim" },
     cmd = { "TodoTrouble", "TodoTelescope" },
     event = { "BufReadPost", "BufNewFile" },
-    config = true,
+    opts = {},
     keys = {
       { "<leader>xt", "<cmd>TodoTrouble<cr>",                           desc = "Todo" },
       { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",   desc = "Todo/Fix/Fixme" },
@@ -105,6 +101,8 @@ return {
       { "<leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
     }
   },
+
+  -- 快捷键提示
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -130,5 +128,40 @@ return {
       wk.setup()
       wk.register(opts.defaults)
     end
+  },
+
+  -- 跳转
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "S",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
+    },
+  },
+
+  -- 搜索替换
+  {
+    "nvim-pack/nvim-spectre",
+    cmd = "Spectre",
+    opts = { open_cmd = "noswapfile vnew" },
+    keys = {
+      { "<leader>fr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+    },
   },
 }
