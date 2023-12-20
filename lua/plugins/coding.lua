@@ -29,33 +29,14 @@ return {
   -- 注释
   {
     "numToStr/Comment.nvim",
+    event = "VeryLazy",
     opts = {},
-    keys = {
-      {
-        "<C-_>",
-        function()
-          require("Comment.api").toggle.linewise.current()
-        end,
-        desc = "注释当前行"
-      },
-      {
-        "<C-_>",
-        function()
-          local esc = vim.api.nvim_replace_termcodes(
-            '<ESC>', true, false, true
-          )
-          vim.api.nvim_feedkeys(esc, 'nx', false)
-          require("Comment.api").toggle.blockwise(vim.fn.visualmode())
-        end,
-        mode = "x",
-        desc = "注释选中的行"
-      }
-    },
   },
 
   -- 添加环绕符号如 "", '', (), {}等
   {
     "kylechui/nvim-surround",
+    version = "*",
     event = "VeryLazy",
     opts = {},
   },
@@ -78,6 +59,7 @@ return {
   {
     "L3MON4D3/LuaSnip",
     build = "make install_jsregexp",
+    lazy = true,
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()

@@ -53,7 +53,7 @@ return {
   {
     "echasnovski/mini.indentscope",
     version = false,
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       symbol = "│",
       options = { try_as_border = true },

@@ -13,26 +13,26 @@ return {
       { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle Neotree" }
     }
   },
-
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    lazy = true,
+    build = "make",
+  },
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = {
-      { 'nvim-lua/plenary.nvim' },
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-        config = function()
-          local telescope = require("telescope")
-          telescope.load_extension("fzf")
-          telescope.load_extension("notify")
-        end
-      },
-    },
     cmd = "Telescope",
     opts = {
       defaults = {
+        prompt_prefix = "   ",
+        selection_caret = "  ",
+        entry_prefix = "  ",
+        layout_strategy = "vertical",
+        layout_config = {
+          prompt_position = "top",
+          width = 0.43,
+          height = 0.38,
+        },
         preview = false,
-        layout_strategy = 'center',
         sorting_strategy = "ascending",
       },
       pickers = {},
@@ -45,6 +45,12 @@ return {
         }
       }
     },
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.load_extension("fzf")
+      telescope.load_extension("notify")
+      telescope.setup(opts)
+    end,
     keys = {
       -- File Packers
       { "<leader><space>", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
@@ -74,8 +80,9 @@ return {
       open_mapping = [[<C-\>]],
       direction = "float",
       float_opts = {
-        width = math.min(vim.o.columns, 80),
-        height = math.min(vim.o.lines, 21)
+        border = "curved",
+        width = math.min(vim.o.columns, 90),
+        height = math.min(vim.o.lines, 25)
       }
     }
   },
@@ -95,10 +102,12 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     opts = {},
     keys = {
-      { "<leader>xt", "<cmd>TodoTrouble<cr>",                           desc = "Todo" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",   desc = "Todo/Fix/Fixme" },
-      { "<leader>ft", "<cmd>TodoTelescope<cr>",                         desc = "Todo" },
-      { "<leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+      { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo" },
+      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme" },
+      { "<leader>ft", "<cmd>TodoTelescope<cr>",                            desc = "Todo" },
+      { "<leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
     }
   },
 
@@ -164,4 +173,9 @@ return {
       { "<leader>fr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
   },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {}
+  }
 }

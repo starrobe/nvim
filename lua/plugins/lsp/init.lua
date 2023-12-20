@@ -1,22 +1,27 @@
 return {
   {
     "williamboman/mason.nvim",
+    lazy = true,
     cmd = "Mason",
     opts = {}
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    lazy = true,
     opts = {
       ensure_installed = require("plugins.lsp.config").servers
     }
   },
   {
+    "folke/neodev.nvim",
+    lazy = true,
+    opts = {}
+  },
+  {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      { "folke/neodev.nvim", opts = {} },
-      "mason.nvim",
-      "mason-lspconfig.nvim",
+      "neodev.nvim"
     },
     config = function()
       local options = {}
@@ -45,7 +50,7 @@ return {
   },
   {
     "nvimtools/none-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     opts = function()
       local null_ls = require("null-ls")
       return {

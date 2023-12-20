@@ -1,17 +1,27 @@
 return {
   {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = {
+      "nvim-treesitter",
+    },
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       ensure_installed = {
-        "vim",
-        "vimdoc",
-        "query",
-        "lua",
+        "bash",
         "c",
         "cpp",
-        "python"
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "query",
+        "python",
+        "regex",
+        "vim",
+        "vimdoc",
       },
       highlight = {
         enable = true,
@@ -26,16 +36,6 @@ return {
         },
       },
       textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-          }
-        },
         move = {
           enable = true,
           set_jumps = true,
@@ -49,11 +49,5 @@ return {
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
     end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    dependencies = {
-      "nvim-treesitter",
-    },
   },
 }
