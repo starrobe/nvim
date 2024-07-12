@@ -41,12 +41,13 @@ M.config = {
         else
           cmp.select_next_item()
         end
-        -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-        -- they way you will only jump inside the snippet region
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
+      elseif luasnip.locally_jumpable(1) then
+        luasnip.jump(1)
       elseif has_words_before() then
         cmp.complete()
+        if #cmp.get_entries() == 1 then
+          cmp.confirm({ select = true })
+        end
       else
         fallback()
       end
@@ -54,7 +55,7 @@ M.config = {
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
+      elseif luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()
@@ -76,21 +77,24 @@ M.config = {
       item.kind = string.format('%s', icons[item.kind])
 
       -- https://github.com/hrsh7th/nvim-cmp/discussions/609
+      FIXEDWIDTH = FIXEDWIDTH or false
       local content = item.abbr
-      local max_context_width = 30
+      if FIXEDWIDTH then
+        vim.o.pumwidth = FIXEDWIDTH
+      end
+
+      local win_width = vim.api.nvim_win_get_width(0)
+      local max_context_width = FIXEDWIDTH and FIXEDWIDTH - 10 or math.floor(win_width * 0.2)
 
       if #content > max_context_width then
         item.abbr = vim.fn.strcharpart(content, 0, max_context_width - 3) .. "..."
+      else
+        item.abbr = content .. (" "):rep(max_context_width - #content)
       end
-
+      item.menu = " "
       return item
     end
   },
-
-  -- performance = {
-  --   -- 只显示12个补全item
-  --   max_view_entries = 12,
-  -- }
 }
 
 return M

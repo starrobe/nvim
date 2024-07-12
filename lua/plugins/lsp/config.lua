@@ -1,10 +1,5 @@
 local M = {}
 
-M.servers = {
-  "lua_ls",
-  "pyright",
-  "marksman",
-}
 
 local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 M.capabilities = status_cmp_ok and cmp_nvim_lsp.default_capabilities() or vim.lsp.protocol.make_client_capabilities()
@@ -25,12 +20,6 @@ M.keymapping = function(ev)
 
   vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
   vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code Action" })
-  vim.keymap.set('n', '<leader>cf', function()
-    vim.lsp.buf.format { async = true }
-  end, { buffer = ev.buf, desc = "Code Format" })
-  vim.keymap.set('n', '<leader>\\', function ()
-    vim.lsp.buf.format({async = true})
-  end, {buffer = ev.buf, desc = "Code Format"})
 end
 
 return M

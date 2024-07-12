@@ -42,41 +42,18 @@ return {
         {
           filter = {
             event = "msg_show",
-            kind = "",
-            find = "written",
+            any = {
+              -- 看不懂。。。
+              -- https://www.lazyvim.org/plugins/ui#noicenvim
+              { find = "%d+L, %d+B" },
+              { find = "; after #%d+" },
+              { find = "; before #%d+" },
+            },
           },
-          opts = { skip = true },
+          view = "mini",
         },
       },
     },
-  },
-  {
-    "echasnovski/mini.indentscope",
-    version = false,
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      symbol = "│",
-      options = { try_as_border = true },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
-        },
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
-      })
-    end,
   },
   { "nvim-tree/nvim-web-devicons", lazy = true },
   { "MunifTanjim/nui.nvim",        lazy = true },

@@ -1,5 +1,4 @@
 return {
-  -- 文件树
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -68,26 +67,6 @@ return {
       { "<leader>fn",      "<cmd>Telescope notify<cr>",      desc = "Notifications" }
     },
   },
-
-  -- 终端
-  {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    keys = {
-      { "<C-\\>", mode = { "n" }, desc = "终端" },
-    },
-    opts = {
-      open_mapping = [[<C-\>]],
-      direction = "float",
-      float_opts = {
-        border = "curved",
-        width = math.min(vim.o.columns, 90),
-        height = math.min(vim.o.lines, 25)
-      }
-    }
-  },
-
-  -- Diagnostics列表
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
@@ -110,8 +89,6 @@ return {
       { "<leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
     }
   },
-
-  -- 快捷键提示
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -138,33 +115,18 @@ return {
       wk.register(opts.defaults)
     end
   },
-
-  -- 跳转
   {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {},
     keys = {
-      {
-        "s",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash").jump()
-        end,
-        desc = "Flash",
-      },
-      {
-        "S",
-        mode = { "n", "o", "x" },
-        function()
-          require("flash").treesitter()
-        end,
-        desc = "Flash Treesitter",
-      },
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
-
-  -- 搜索替换
   {
     "nvim-pack/nvim-spectre",
     cmd = "Spectre",

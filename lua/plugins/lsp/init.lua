@@ -8,9 +8,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = true,
-    opts = {
-      ensure_installed = require("plugins.lsp.config").servers
-    }
+    opts = {}
   },
   {
     "folke/neodev.nvim",
@@ -27,7 +25,6 @@ return {
       local options = {}
       local lspconfig = require("plugins.lsp.config")
       local servers = require("mason-lspconfig").get_installed_servers();
-      table.insert(servers, "clangd")
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -49,19 +46,49 @@ return {
     end,
   },
   {
-    "nvimtools/none-ls.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = function()
-      local null_ls = require("null-ls")
-      return {
-        sources = {
-          null_ls.builtins.formatting.clang_format.with({
-            extra_args = {
-              "-style={BasedOnStyle: LLVM, IndentWidth: 4}"
-            }
-          })
-        },
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        "<leader>cf",
+        function()
+          require("conform").format({ async = true, lsp_format = "fallback" })
+        end,
+        mode = "n",
+        desc = "Code Format",
+      },
+      {
+        "<leader>\\",
+        function()
+          require("conform").format({ async = true, lsp_format = "fallback" })
+        end,
+        mode = "n",
+        desc = "Code Format",
       }
+    },
+    -- Everything in opts will be passed to setup()
+    opts = {
+      format = {
+        lsp_format = "fallback"
+      },
+      -- Define your formatters
+      formatters_by_ft = {
+        lua = { "stylua" },
+        c = { "clang-format" },
+        cpp = { "clang-format" }
+      },
+      -- Set up format-on-save
+      format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
+      -- Customize formatters
+      formatters = {},
+    },
+    init = function()
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
-  },
+    config = function(_, opts)
+      opts.formatters["clang-format"] = { prepend_args = { "--style", "{ BasedOnStyle: LLVM, IndentWidth: 4 }" } }
+      require("conform").setup(opts)
+    end,
+  }
 }

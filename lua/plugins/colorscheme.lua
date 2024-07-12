@@ -12,6 +12,8 @@ return {
     lazy = false,
     priority = 1000, -- make sure to load this before all the other start plugins
     opts = {
+      -- https://github.com/folke/tokyonight.nvim/blob/main/README.md#-overriding-colors--highlight-groups
+      -- Borderless Telescope
       on_highlights = function(hl, c)
         local prompt = "#2d3149"
         hl.TelescopeNormal = {

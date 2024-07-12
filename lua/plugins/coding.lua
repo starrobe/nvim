@@ -1,50 +1,35 @@
 return {
-  -- 自动括号
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {
-      check_ts = true,
-      ts_config = {
-        lua = { 'string' }, -- it will not add a pair on that treesitter node
-        javascript = { 'template_string' },
-        java = false,       -- don't check treesitter on java
-      },
-      fast_wrap = {
-        map = '<M-e>', -- <Alt-e>
-        chars = { '{', '[', '(', '"', "'" },
-        pattern = [=[[%'%"%>%]%)%}%,]]=],
-        end_key = '$',
-        before_key = 'h',
-        after_key = 'l',
-        cursor_pos_before = true,
-        keys = 'qwertyuiopzxcvbnmasdfghjkl',
-        manual_position = true,
-        highlight = 'Search',
-        highlight_grey = 'Comment'
-      },
+      fast_wrap = {},
     },
+    config = function(_, opts)
+      require("nvim-autopairs").setup(opts)
+      -- If you want insert `(` after select function or method item
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      local cmp = require('cmp')
+      cmp.event:on(
+        'confirm_done',
+        cmp_autopairs.on_confirm_done()
+      )
+    end
   },
-
-  -- 注释
   {
     "numToStr/Comment.nvim",
     event = "VeryLazy",
     opts = {},
   },
-
-  -- 添加环绕符号如 "", '', (), {}等
   {
     "kylechui/nvim-surround",
     version = "*",
     event = "VeryLazy",
     opts = {},
   },
-
-  -- 代码补全
   {
     "hrsh7th/nvim-cmp",
-    event = {"InsertEnter", "CmdlineEnter"},
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
