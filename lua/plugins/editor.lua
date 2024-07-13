@@ -24,7 +24,6 @@ return {
       defaults = {
         prompt_prefix = "   ",
         selection_caret = "  ",
-        entry_prefix = "  ",
         layout_strategy = "vertical",
         layout_config = {
           prompt_position = "top",
@@ -52,41 +51,36 @@ return {
     end,
     keys = {
       -- File Packers
-      { "<leader><space>", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
-      { "<leader>/",       "<cmd>Telescope live_grep<cr>",   desc = "Live Grep" },
-      { "<leader>ff",      "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
-      { "<leader>fg",      "<cmd>Telescope live_grep<cr>",   desc = "Live Grep" },
-      { "<leader>fs",      "<cmd>Telescope grep_string<cr>", desc = "Grep Current String" },
+      { "<leader><leader>", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
+      { "<leader>ff",       "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
+      { "<leader>fs",       "<cmd>Telescope live_grep<cr>",   desc = "Live Grep" },
       -- Vim Pickers
-      { "<leader>fb",      "<cmd>Telescope buffers<cr>",     desc = "Find Buffers" },
-      { "<leader>fh",      "<cmd>Telescope help_tags<cr>",   desc = "Find Helps" },
-      { "<leader>fo",      "<cmd>Telescope vim_options<cr>", desc = "Vim Options" },
-      { "<leader>fk",      "<cmd>Telescope keymaps<cr>",     desc = "Key Maps" },
-      { "<leader>fc",      "<cmd>Telescope colorscheme<cr>", desc = "Color Scheme" },
+      { "<leader>fb",       "<cmd>Telescope buffers<cr>",     desc = "Find Buffers" },
+      { "<leader>fh",       "<cmd>Telescope help_tags<cr>",   desc = "Find Helps" },
+      { "<leader>fo",       "<cmd>Telescope vim_options<cr>", desc = "Vim Options" },
+      { "<leader>fk",       "<cmd>Telescope keymaps<cr>",     desc = "Key Maps" },
+      { "<leader>fc",       "<cmd>Telescope colorscheme<cr>", desc = "Color Scheme" },
       -- Extensions
-      { "<leader>fn",      "<cmd>Telescope notify<cr>",      desc = "Notifications" }
+      { "<leader>fn",       "<cmd>Telescope notify<cr>",      desc = "Notifications" }
     },
   },
   {
     "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
-    opts = { use_diagnostic_signs = true },
+    cmd = "Trouble",
+    opts = {},
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Diagnostics" }
+      { "<leader>lt", "<cmd>Trouble todo toggle<cr>",        desc = "Todo" },
+      { "<leader>ld", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" }
     },
   },
   {
     "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble", "TodoTelescope" },
     event = { "BufReadPost", "BufNewFile" },
     opts = {},
     keys = {
       { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
       { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme" },
       { "<leader>ft", "<cmd>TodoTelescope<cr>",                            desc = "Todo" },
-      { "<leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
     }
   },
   {
@@ -96,23 +90,20 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 500
     end,
-    opts = {
-      defaults = {
-        ["g"] = { name = "+goto" },
-        ["]"] = { name = "+net" },
-        ["["] = { name = "+previous" },
-        ["<leader><tab>"] = { name = "+tabs" },
-        ["<leader>b"] = { name = "+buffer" },
-        ["<leader>c"] = { name = "+code" },
-        ["<leader>f"] = { name = "+find" },
-        ["<leader>w"] = { name = "+windows" },
-        ["<leader>x"] = { name = "+utils" },
-      }
-    },
-    config = function(_, opts)
+    config = function()
       local wk = require("which-key")
       wk.setup()
-      wk.register(opts.defaults)
+      wk.add({
+        { "g",             group = "goto" },
+        { "]",             group = "next" },
+        { "[",             group = "previous" },
+        { "<leader><tab>", group = "tabs" },
+        { "<leader>b",     group = "buffer" },
+        { "<leader>c",     group = "code" },
+        { "<leader>f",     group = "search" },
+        { "<leader>w",     group = "windows" },
+        { "<leader>l",     group = "list" },
+      })
     end
   },
   {
