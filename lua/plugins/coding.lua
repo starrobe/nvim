@@ -5,51 +5,50 @@ return {
     opts = {
       fast_wrap = {},
     },
-    config = function(_, opts)
-      require("nvim-autopairs").setup(opts)
-      -- If you want insert `(` after select function or method item
-      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-      local cmp = require('cmp')
-      cmp.event:on(
-        'confirm_done',
-        cmp_autopairs.on_confirm_done()
-      )
-    end
   },
   {
-    "numToStr/Comment.nvim",
+    "folke/ts-comments.nvim",
     event = "VeryLazy",
     opts = {},
   },
   {
     "kylechui/nvim-surround",
-    version = "*",
+    version = "^3.0.0",
     event = "VeryLazy",
     opts = {},
   },
   {
     "hrsh7th/nvim-cmp",
-    event = { "InsertEnter", "CmdlineEnter" },
+    event = { "InsertEnter" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "saadparwaiz1/cmp_luasnip"
+      {
+        "L3MON4D3/LuaSnip",
+        build = "make install_jsregexp",
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+        },
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+          require("luasnip").setup()
+        end,
+      },
     },
-    config = function()
-      local options = require("plugins.configs.nvim-cmp").config
-      require("cmp").setup(options)
+    opts = function()
+      return require("plugins.configs.nvim-cmp").config
     end
   },
   {
-    "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp",
-    lazy = true,
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        -- { path = "snacks.nvim",        words = { "Snacks" } },
+        -- { path = "lazy.nvim",          words = { "LazyVim" } },
+      },
     },
-  },
+  }
 }

@@ -11,11 +11,6 @@ return {
     opts = {}
   },
   {
-    "folke/neodev.nvim",
-    lazy = true,
-    opts = {}
-  },
-  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
