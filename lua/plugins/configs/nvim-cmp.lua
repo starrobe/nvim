@@ -9,7 +9,6 @@ end
 local luasnip = require "luasnip"
 local cmp = require "cmp"
 
--- 指定 snippet 引擎
 M.config = {
   view = {
     entries = { name = 'custom', selection_order = 'near_cursor' }
@@ -63,10 +62,9 @@ M.config = {
     end, { "i", "s" }),
   }),
 
-  -- 来源
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'luasnip' }, -- For vsnip users.
+    { name = 'luasnip' },
   }, {
     { name = 'buffer' },
   }),

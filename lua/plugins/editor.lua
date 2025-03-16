@@ -17,6 +17,7 @@ return {
     lazy = true,
     build = "make",
   },
+  --[[
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
@@ -46,7 +47,6 @@ return {
     config = function(_, opts)
       local telescope = require("telescope")
       telescope.load_extension("fzf")
-      telescope.load_extension("notify")
       telescope.setup(opts)
     end,
     keys = {
@@ -61,9 +61,10 @@ return {
       { "<leader>fk",       "<cmd>Telescope keymaps<cr>",     desc = "Key Maps" },
       { "<leader>fc",       "<cmd>Telescope colorscheme<cr>", desc = "Color Scheme" },
       -- Extensions
-      { "<leader>fn",       "<cmd>Telescope notify<cr>",      desc = "Notifications" }
+      --   { "<leader>fn",       "<cmd>Telescope notify<cr>",      desc = "Notifications" }
     },
   },
+  --]]
   {
     "folke/trouble.nvim",
     cmd = "Trouble",
@@ -86,25 +87,24 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 500
-    end,
-    config = function()
-      local wk = require("which-key")
-      wk.setup()
-      wk.add({
-        { "g",             group = "goto" },
-        { "]",             group = "next" },
-        { "[",             group = "previous" },
-        { "<leader><tab>", group = "tabs" },
-        { "<leader>b",     group = "buffer" },
-        { "<leader>c",     group = "code" },
-        { "<leader>f",     group = "search" },
-        { "<leader>w",     group = "windows" },
-        { "<leader>l",     group = "list" },
-      })
-    end
+    opts = {
+      preset = "helix",
+      spec = {
+        {
+          mode = { "n", "v" },
+          { "g", group = "goto" },
+          { "]", group = "next" },
+          { "[", group = "previous" },
+          { "<leader><tab>", group = "tabs" },
+          { "<leader>b", group = "buffer" },
+          { "<leader>c", group = "code" },
+          { "<leader>f", group = "find" },
+          { "<leader>s", group = "search" },
+          { "<leader>w", group = "windows" },
+          { "<leader>l", group = "list", icon = { icon = "󱖫 ", color = "green" } },
+        }
+      }
+    },
   },
   {
     "folke/flash.nvim",
@@ -119,11 +119,25 @@ return {
     },
   },
   {
-    "nvim-pack/nvim-spectre",
-    cmd = "Spectre",
-    opts = { open_cmd = "noswapfile vnew" },
+    "MagicDuck/grug-far.nvim",
+    cmd = "GrugFar",
+    opts = {},
     keys = {
-      { "<leader>fr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+      {
+        "<leader>sr",
+        function()
+          local grug = require("grug-far")
+          local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+          grug.open({
+            transient = true,
+            prefills = {
+              filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+            },
+          })
+        end,
+        mode = { "n", "v" },
+        desc = "Search and Replace",
+      },
     },
   },
   {

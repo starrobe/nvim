@@ -18,11 +18,11 @@ map("v", ">", ">gv", opts)
 -- Buffer
 map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New Buffer" })
 map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Delete Buffer" })
-map("n", "]b", "<cmd>bn<cr>", {desc = "Next Buffer"})
-map("n", "[b", "<cmd>bp<cr>", {desc = "Previous Buffer"})
+map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" })
+map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" })
 
 -- Window
-map("n", "<leader>wd", "<C-w>c", { desc = "Close Window" })
+map("n", "<leader>wc", "<C-w>c", { desc = "Close Window" })
 map("n", "<leader>wo", "<C-w>o", { desc = "Close other Window" })
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })

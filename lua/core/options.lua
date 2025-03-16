@@ -2,15 +2,32 @@ vim.g.mapleader      = " "
 vim.g.maplocalleader = " "
 local opt            = vim.opt
 
-opt.colorcolumn      = "80"                    -- 第80列高亮
-opt.clipboard        = "unnamedplus"           -- 剪切板
-opt.completeopt      = "menu,menuone,noselect" -- 补全menu
-opt.cursorline       = true                    -- 当前行高亮
-opt.foldmethod       = "indent"                -- 根据缩进折叠
-opt.foldlevelstart   = 99                      -- 开始时关闭所有折叠
-opt.hlsearch         = false                   -- 关闭搜索匹配高亮
-opt.ignorecase       = true                    -- 搜索时忽略大小写
-opt.list             = true                    -- 通过字符展示不可见的符号
+-- 第80列高亮
+opt.colorcolumn      = "80"
+
+-- 同步系统与nvim的剪切板
+opt.clipboard        = "unnamedplus"
+
+-- 补全menu的配置
+-- 详情见`:help 'completeopt'`
+opt.completeopt      = "menu,menuone,noselect"
+
+-- 当前行高亮
+opt.cursorline       = true
+
+-- 根据缩进折叠
+-- 开始时关闭所有折叠
+opt.foldmethod       = "indent"
+opt.foldlevelstart   = 99
+
+-- 搜索智能匹配
+-- 搜索时忽略大小写
+opt.hlsearch         = false
+opt.smartcase        = true
+opt.ignorecase       = true
+
+-- 通过字符展示不可见的符号
+opt.list             = true
 opt.listchars        = {
   nbsp     = '⦸',
   extends  = '»',
@@ -18,27 +35,44 @@ opt.listchars        = {
   tab      = '▷⋯',
   trail    = '•',
 }
-opt.number           = true  -- 显示行数
-opt.pumheight        = 12    -- popup menu的最大高度
-opt.relativenumber   = true  -- 显示相对行数
-opt.scrolloff        = 3     -- 向上/下跳行浏览时，与顶部/底部隔3行
-opt.sidescrolloff    = 3     -- 左右隔3行
-opt.showmode         = false -- 不显示模式
-opt.smartcase        = true  -- 搜索时智能匹配
-opt.smartindent      = true  -- 智能自动缩进
-opt.splitbelow       = true  -- 向下分屏
-opt.splitright       = true  -- 向右分屏
-opt.termguicolors    = true  -- 终端中使用guifg/guibg代替ctermfg/ctermbg
-opt.visualbell       = true  -- 关闭声音
-opt.wrap             = false -- 不换行
 
--- opt.backup默认为off
-opt.swapfile         = false -- 不创建swap文件
-opt.undofile         = true  -- 使用undo文件
-opt.writebackup      = false -- 编辑时不备份
+-- 使用鼠标
+opt.mouse            = "a"
 
-opt.expandtab        = true  -- 用空格组成tab
-opt.shiftwidth       = 2     -- 自动缩进的长度
-opt.shiftround       = true  -- shiftwidth整数倍缩进
-opt.softtabstop      = 2     -- tab插入的空格数
-opt.tabstop          = 2     -- tab显示的空格数
+-- 显示行数
+-- 显示相对行数
+opt.number           = true
+opt.relativenumber   = true
+
+-- 下拉菜单的最大item数
+opt.pumheight        = 12
+
+-- 向上/下跳行浏览时，与顶部/底部隔3行
+-- 左右隔3行
+opt.scrolloff        = 3
+opt.sidescrolloff    = 3
+
+-- 不显示模式
+opt.showmode         = false
+
+-- 智能缩进
+opt.smartindent      = true
+
+-- 默认向下,向右分屏
+opt.splitbelow       = true
+opt.splitright       = true
+
+-- 终端中使用guifg/guibg代替ctermfg/ctermbg
+opt.termguicolors    = true
+
+-- 不换行
+opt.wrap             = false
+
+-- 保存undo历史到undo文件中
+opt.undofile         = true
+
+opt.expandtab        = true -- 用空格组成tab
+opt.shiftwidth       = 2    -- 自动缩进的长度
+opt.shiftround       = true -- shiftwidth整数倍缩进
+opt.softtabstop      = 2    -- tab插入的空格数
+opt.tabstop          = 2    -- tab显示的空格数

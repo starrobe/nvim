@@ -51,4 +51,14 @@ return {
       },
     },
   }
+  -- TODO: 懒得折腾了，留着以后了
+  -- TODO: fzf-lua as a replacement for telescope.nvim
+  -- LazyVim好像没用fzf-lua
+  -- TODO: blink.cmp as a replacement for nvim-cmp
+  -- TODO: snacks.nvim
+  -- nvim-notify => snacks.notifier
+  -- snacks.terminal for new termianl
+  -- ...
+  -- TODO: grug-far.nvim as a replacement for nvim-spectre
+  -- TODO: 待续。。。
 }

@@ -10,11 +10,6 @@ M.keymapping = function(ev)
 
   -- Buffer local mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Goto Declaration" })
-  vim.keymap.set('n', 'gd', "<cmd>Telescope lsp_definitions<cr>", { buffer = ev.buf, desc = "Definitions" })
-  vim.keymap.set('n', 'gr', "<cmd>Telescope lsp_references<cr>", { buffer = ev.buf, desc = "References" })
-  vim.keymap.set('n', 'gi', "<cmd>Telescope lsp_implementations<cr>", { buffer = ev.buf, desc = "Implementations" })
-  vim.keymap.set('n', 'gt', "<cmd>Telescope lsp_type_definitions<cr>", { buffer = ev.buf, desc = "Type Definitions" })
   vim.keymap.set('n', 'gk', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature Help" })
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover" })
 
