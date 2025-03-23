@@ -22,12 +22,12 @@ map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" })
 
 -- Window
-map("n", "<leader>wc", "<C-w>c", { desc = "Close Window" })
+map("n", "<leader>wd", "<C-w>c", { desc = "Close Window" })
 map("n", "<leader>wo", "<C-w>o", { desc = "Close other Window" })
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+map("n", "<leader>wk", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+map("n", "<leader>wj", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+map("n", "<leader>wl", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+map("n", "<leader>wh", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Diagnostic
 map("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Float Diagnostic" })

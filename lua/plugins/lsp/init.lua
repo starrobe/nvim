@@ -13,30 +13,37 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = {
-      "neodev.nvim"
-    },
-    config = function()
-      local options = {}
-      local lspconfig = require("plugins.lsp.config")
+    config = function(_, opts)
       local servers = require("mason-lspconfig").get_installed_servers();
+
+      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      local has_blink, blink = pcall(require, "blink.cmp")
+
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+        has_blink and blink.get_lsp_capabilities() or {},
+        opts.capabilities or {}
+      )
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
-          lspconfig.keymapping(ev)
+          vim.keymap.set('n', 'gk', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature Help" })
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover" })
+          vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
+          vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code Action" })
         end
       })
 
       for _, server in pairs(servers) do
-        options = {
-          capabilities = lspconfig.capabilities,
-        }
-        local require_ok, settings = pcall(require, "plugins.lsp.settings." .. server)
-        if require_ok then
-          options = vim.tbl_deep_extend("force", settings, options)
-        end
-        require("lspconfig")[server].setup(options)
+        local has_server_config, server_config = pcall(require, "plugins.lsp.servers." .. server)
+        local server_opts = vim.tbl_deep_extend("force", {
+          capabilities = vim.deepcopy(capabilities),
+        }, has_server_config and server_config or {})
+        require("lspconfig")[server].setup(server_opts)
       end
     end,
   },
@@ -62,20 +69,27 @@ return {
         desc = "Code Format",
       }
     },
-    -- Everything in opts will be passed to setup()
     opts = {
-      format = {
-        lsp_format = "fallback"
-      },
-      -- Define your formatters
+
       formatters_by_ft = {
         lua = { "stylua" },
         c = { "clang-format" },
         cpp = { "clang-format" }
       },
-      -- Set up format-on-save
-      format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
-      -- Customize formatters
+      -- Set this to change the default values when calling conform.format()
+      -- This will also affect the default values for format_on_save/format_after_save
+      default_format_opts = {
+        lsp_format = "fallback",
+      },
+      -- If this is set, Conform will run the formatter on save.
+      -- It will pass the table to conform.format().
+      -- This can also be a function that returns the table.
+      format_on_save = {
+        -- I recommend these options. See :help conform.format for details.
+        lsp_format = "fallback",
+        timeout_ms = 500,
+      },
+      -- Custom formatters and overrides for built-in formatters
       formatters = {},
     },
     init = function()

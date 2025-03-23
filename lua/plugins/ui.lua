@@ -5,6 +5,34 @@ return {
     opts = require("plugins.configs.lualine").config,
   },
   {
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        diagnostics = "nvim_lsp",
+        offsets = {
+          {
+            filetype = "snacks_layout_box",
+          }
+        },
+        hover = {
+          enabled = true,
+          delay = 200,
+          reveal = { 'close' }
+        },
+        indicator = {
+          style = "none",
+        },
+        diagnostics_indicator = function(count, level)
+          local diagnostic_signs = require("plugins.configs.icons").diagnostic
+          local icon = level:match("error") and diagnostic_signs.Error .. " "
+              or diagnostic_signs.Warn .. " "
+          return " " .. icon .. count
+        end
+      }
+    }
+  },
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {

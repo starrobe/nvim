@@ -3,11 +3,11 @@ local M = {}
 local diagnostic_icons = require("plugins.configs.icons").diagnostic
 
 local modified_sign = function()
-  local padding = (" "):rep(3)
+  local padding = (" "):rep(1)
   if vim.bo.modified then
     return padding .. "✘ "
   else
-    return padding .. " "
+    return padding .. "  "
   end
 end
 
@@ -61,6 +61,7 @@ M.config = {
     lualine_c = {
       {
         "filename",
+        path = 1,
         symbols = {
           modified = "",
           readonly = require("plugins.configs.icons").file.FileReadOnly
@@ -84,14 +85,16 @@ M.config = {
     },
     lualine_x = {
       {
-        function() return require("noice").api.status.command.get() end,
-        cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-        color = "Statement"
+        require("noice").api.status.command.get,
+        cond = require("noice").api.status.command.has,
+        color = function()
+          return { fg = Snacks.util.color("Statement") }
+        end
       },
     },
     lualine_y = {},
     lualine_z = { location },
   },
-  extensions = { "neo-tree", "lazy" },
+  extensions = { "lazy" },
 }
 return M

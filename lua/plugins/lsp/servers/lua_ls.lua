@@ -1,11 +1,14 @@
 return {
   settings = {
     Lua = {
-      diagnostics = {
-        globals = { "vim", "Snacks" },
+      runtime = {
+        version = "LuaJIT"
       },
       workspace = {
         checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME
+        }
       },
       completion = {
         callSnippet = "Replace",
