@@ -56,15 +56,14 @@ M.config = {
   },
   sections = {
     lualine_a = { modified_sign },
-    lualine_b = {
-    },
+    lualine_b = {},
     lualine_c = {
       {
         "filename",
         path = 1,
         symbols = {
           modified = "",
-          readonly = require("plugins.configs.icons").file.FileReadOnly
+          readonly = require("plugins.configs.icons").file.FileReadOnly,
         },
         separator = "",
       },
@@ -89,7 +88,7 @@ M.config = {
         cond = require("noice").api.status.command.has,
         color = function()
           return { fg = Snacks.util.color("Statement") }
-        end
+        end,
       },
     },
     lualine_y = {},

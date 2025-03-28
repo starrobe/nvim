@@ -1,18 +1,22 @@
-require "core.options"
-require "core.mappings"
+require("core.options")
+require("core.mappings")
 
 local diagnostic_signs = require("plugins.configs.icons").diagnostic
-for type, icon in pairs(diagnostic_signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
 local config = {
   virtual_text = false,
   float = {
     focusable = false,
-    source = 'if_many',
-    header = '',
-    prefix = '',
+    source = "if_many",
+    header = "",
+    prefix = "",
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = diagnostic_signs.Error,
+      [vim.diagnostic.severity.HINT] = diagnostic_signs.Hint,
+      [vim.diagnostic.severity.INFO] = diagnostic_signs.Info,
+      [vim.diagnostic.severity.WARN] = diagnostic_signs.Warn,
+    },
   },
   severity_sort = true,
 }
@@ -26,7 +30,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out,                            "WarningMsg" },
+      { out, "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()

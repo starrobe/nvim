@@ -2,13 +2,13 @@ return {
   settings = {
     Lua = {
       runtime = {
-        version = "LuaJIT"
+        version = "LuaJIT",
       },
       workspace = {
         checkThirdParty = false,
         library = {
-          vim.env.VIMRUNTIME
-        }
+          vim.env.VIMRUNTIME,
+        },
       },
       completion = {
         callSnippet = "Replace",

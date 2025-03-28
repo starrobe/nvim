@@ -4,10 +4,10 @@ return {
     cmd = "Trouble",
     opts = {},
     keys = {
-      { "<leader>lt", "<cmd>Trouble todo toggle<cr>",        desc = "Todo" },
+      { "<leader>lt", "<cmd>Trouble todo toggle<cr>", desc = "Todo" },
       { "<leader>ld", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
-      { "<leader>ll", "<cmd>Trouble loclist toggle<cr>",     desc = "Location List (Trouble)" },
-      { "<leader>lq", "<cmd>Trouble qflist toggle<cr>",      desc = "Quickfix List (Trouble)" },
+      { "<leader>ll", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+      { "<leader>lq", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
     },
   },
   {
@@ -15,9 +15,21 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     opts = {},
     keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-    }
+      {
+        "]t",
+        function()
+          require("todo-comments").jump_next()
+        end,
+        desc = "Next todo comment",
+      },
+      {
+        "[t",
+        function()
+          require("todo-comments").jump_prev()
+        end,
+        desc = "Previous todo comment",
+      },
+    },
   },
   {
     "folke/which-key.nvim",
@@ -27,18 +39,18 @@ return {
       spec = {
         {
           mode = { "n", "v" },
-          { "g", group = "goto" },
           { "]", group = "next" },
           { "[", group = "previous" },
           { "<leader><tab>", group = "tabs" },
           { "<leader>b", group = "buffer" },
           { "<leader>c", group = "code" },
           { "<leader>f", group = "find" },
+          { "<leader>g", group = "goto" },
           { "<leader>s", group = "search" },
           { "<leader>w", group = "windows" },
           { "<leader>l", group = "list", icon = { icon = "󱖫 ", color = "green" } },
-        }
-      }
+        },
+      },
     },
   },
   {
@@ -46,11 +58,46 @@ return {
     event = "VeryLazy",
     opts = {},
     keys = {
-      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "S",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
+      {
+        "r",
+        mode = "o",
+        function()
+          require("flash").remote()
+        end,
+        desc = "Remote Flash",
+      },
+      {
+        "R",
+        mode = { "o", "x" },
+        function()
+          require("flash").treesitter_search()
+        end,
+        desc = "Treesitter Search",
+      },
+      {
+        "<c-s>",
+        mode = { "c" },
+        function()
+          require("flash").toggle()
+        end,
+        desc = "Toggle Flash Search",
+      },
     },
   },
   {
@@ -78,6 +125,6 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPost", "BufNewFile" },
-    opts = {}
-  }
+    opts = {},
+  },
 }
