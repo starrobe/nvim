@@ -1,21 +1,31 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     lazy = true,
     cmd = "Mason",
     opts = {},
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     lazy = true,
-    opts = {},
+    opts = {
+      ensure_installed = {
+        "clangd",
+        "eslint",
+        "lua_ls",
+        "marksman",
+        "ruff",
+        "rust_analyzer",
+      },
+    },
   },
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "mason-lspconfig.nvim",
+    },
     config = function()
-      local servers = require("mason-lspconfig").get_installed_servers()
-
       local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local has_blink, blink = pcall(require, "blink.cmp")
 
@@ -40,13 +50,9 @@ return {
       -- https://neovim.io/doc/user/lsp.html#_lua-module:-vim.lsp.inlay_hint
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 
-      for _, server in pairs(servers) do
-        local has_server_config, server_config = pcall(require, "plugins.lsp.servers." .. server)
-        local server_opts = vim.tbl_deep_extend("force", {
-          capabilities = vim.deepcopy(capabilities),
-        }, has_server_config and server_config or {})
-        require("lspconfig")[server].setup(server_opts)
-      end
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
     end,
   },
 }

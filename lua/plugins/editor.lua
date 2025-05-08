@@ -47,6 +47,7 @@ return {
           { "<leader>f", group = "find" },
           { "<leader>g", group = "goto" },
           { "<leader>s", group = "search" },
+          { "<leader>u", group = "toggle" },
           { "<leader>w", group = "windows" },
           { "<leader>l", group = "list", icon = { icon = "󱖫 ", color = "green" } },
         },

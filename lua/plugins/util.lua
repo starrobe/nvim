@@ -19,7 +19,6 @@ return {
       input = { enabled = true },
       picker = { enabled = true },
       notifier = { enabled = true },
-      profiler = { enabled = true },
       quickfile = { enabled = true },
       scope = { enabled = true },
       scroll = { enabled = true },
