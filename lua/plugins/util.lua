@@ -1,13 +1,6 @@
 return {
   { "nvim-lua/plenary.nvim", lazy = true },
   {
-    "norcalli/nvim-colorizer.lua",
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      require("colorizer").setup()
-    end,
-  },
-  {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,

@@ -6,8 +6,6 @@ return {
     keys = {
       { "<leader>lt", "<cmd>Trouble todo toggle<cr>", desc = "Todo" },
       { "<leader>ld", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
-      { "<leader>ll", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
-      { "<leader>lq", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
     },
   },
   {

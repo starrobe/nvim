@@ -1,19 +1,16 @@
 return {
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {
-      fast_wrap = {},
-    },
-  },
-  {
-    "folke/ts-comments.nvim",
+    "echasnovski/mini.pairs",
     event = "VeryLazy",
     opts = {},
   },
   {
-    "kylechui/nvim-surround",
-    version = "^3.0.0",
+    "echasnovski/mini.surround",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
+    "folke/ts-comments.nvim",
     event = "VeryLazy",
     opts = {},
   },
