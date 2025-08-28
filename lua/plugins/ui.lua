@@ -35,6 +35,6 @@ return {
     },
   },
   { "nvim-tree/nvim-web-devicons", lazy = true },
-  { "echasnovski/mini.icons", lazy = true },
+  { "nvim-mini/mini.icons", lazy = true },
   { "MunifTanjim/nui.nvim", lazy = true },
 }
