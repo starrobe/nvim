@@ -8,16 +8,7 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     lazy = true,
-    opts = {
-      ensure_installed = {
-        "clangd",
-        "eslint",
-        "lua_ls",
-        "marksman",
-        "ruff",
-        "rust_analyzer",
-      },
-    },
+    opts = {},
   },
   {
     "neovim/nvim-lspconfig",
@@ -26,14 +17,12 @@ return {
       "mason-lspconfig.nvim",
     },
     config = function()
-      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local has_blink, blink = pcall(require, "blink.cmp")
 
       local capabilities = vim.tbl_deep_extend(
         "force",
         {},
         vim.lsp.protocol.make_client_capabilities(),
-        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
         has_blink and blink.get_lsp_capabilities() or {}
       )
 

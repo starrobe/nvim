@@ -11,30 +11,15 @@ return {
         },
       },
       presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
+        bottom_search = true,         -- use a classic bottom cmdline for search
+        command_palette = true,       -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
-      },
-      routes = {
-        {
-          filter = {
-            event = "msg_show",
-            any = {
-              -- 看不懂。。。
-              -- https://www.lazyvim.org/plugins/ui#noicenvim
-              { find = "%d+L, %d+B" },
-              { find = "; after #%d+" },
-              { find = "; before #%d+" },
-            },
-          },
-          view = "mini",
-        },
+        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false,       -- add a border to hover docs and signature help
       },
     },
   },
   { "nvim-tree/nvim-web-devicons", lazy = true },
-  { "nvim-mini/mini.icons", lazy = true },
-  { "MunifTanjim/nui.nvim", lazy = true },
+  { "nvim-mini/mini.icons",        lazy = true },
+  { "MunifTanjim/nui.nvim",        lazy = true },
 }

@@ -22,7 +22,7 @@ return {
     dependencies = { "rafamadriz/friendly-snippets" },
 
     -- use a release tag to download pre-built binaries
-    version = "*",
+    version = "1.*",
     -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     -- build = 'cargo build --release',
     -- If you use nix, you can build from source using latest nightly rust with:
@@ -102,7 +102,7 @@ return {
     opts = {
       library = {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        { path = "snacks.nvim", words = { "Snacks" } },
+        { path = "snacks.nvim",        words = { "Snacks" } },
       },
     },
   },
@@ -133,7 +133,6 @@ return {
         lua = { "stylua" },
         c = { "clang_format" },
         cpp = { "clang_format" },
-        typescript = { "prettier" },
       },
       -- Set this to change the default values when calling conform.format()
       -- This will also affect the default values for format_on_save/format_after_save
