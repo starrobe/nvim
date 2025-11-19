@@ -2,10 +2,26 @@ return {
   {
     "folke/trouble.nvim",
     cmd = "Trouble",
-    opts = {},
+    opts = {
+      modes = {
+        preview_float = {
+          mode = "diagnostics",
+          preview = {
+            type = "float",
+            relative = "editor",
+            border = "rounded",
+            title = "Preview",
+            title_pos = "center",
+            position = { 0, -2 },
+            size = { width = 0.5, height = 0.5 },
+            zindex = 200,
+          },
+        },
+      },
+    },
     keys = {
       { "<leader>lt", "<cmd>Trouble todo toggle<cr>", desc = "Todo" },
-      { "<leader>ld", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
+      { "<leader>ld", "<cmd>Trouble preview_float toggle<cr>", desc = "Diagnostics" },
     },
   },
   {
