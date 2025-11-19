@@ -4,7 +4,7 @@ return {
     cmd = "Trouble",
     opts = {},
     keys = {
-      { "<leader>lt", "<cmd>Trouble todo toggle<cr>",        desc = "Todo" },
+      { "<leader>lt", "<cmd>Trouble todo toggle<cr>", desc = "Todo" },
       { "<leader>ld", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
     },
   },
@@ -43,7 +43,7 @@ return {
           { "<leader>b", group = "buffer" },
           { "<leader>c", group = "code" },
           { "<leader>f", group = "find" },
-          { "<leader>g", group = "goto" },
+          { "<leader>g", group = "goto", icon = { icon = "", color = "azure" } },
           { "<leader>s", group = "search" },
           { "<leader>u", group = "toggle" },
           { "<leader>w", group = "windows" },

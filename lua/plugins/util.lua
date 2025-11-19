@@ -42,11 +42,11 @@ return {
         desc = "Find Files",
       },
       {
-        "<leader>/",
+        "<leader>n",
         function()
-          Snacks.picker.smart()
+          Snacks.picker.notifications()
         end,
-        desc = "Smart Find Files",
+        desc = "Notification History",
       },
       {
         "<leader>e",
@@ -78,6 +78,13 @@ return {
         end,
         desc = "Find Files",
       },
+      {
+        "<leader>fs",
+        function()
+          Snacks.picker.smart()
+        end,
+        desc = "Smart Find Files",
+      },
 
       -- Grep
       {
@@ -104,20 +111,6 @@ return {
       },
 
       -- search
-      {
-        '<leader>s"',
-        function()
-          Snacks.picker.registers()
-        end,
-        desc = "Registers",
-      },
-      {
-        "<leader>s/",
-        function()
-          Snacks.picker.search_history()
-        end,
-        desc = "Search History",
-      },
       {
         "<leader>sc",
         function()
@@ -147,13 +140,6 @@ return {
         desc = "Help Pages",
       },
       {
-        "<leader>sH",
-        function()
-          Snacks.picker.highlights()
-        end,
-        desc = "Highlights",
-      },
-      {
         "<leader>sk",
         function()
           Snacks.picker.keymaps()
@@ -166,20 +152,6 @@ return {
           Snacks.picker.marks()
         end,
         desc = "Marks",
-      },
-      {
-        "<leader>sn",
-        function()
-          Snacks.notifier.show_history()
-        end,
-        desc = "Notification History",
-      },
-      {
-        "<leader>su",
-        function()
-          Snacks.picker.undo()
-        end,
-        desc = "Undo History",
       },
 
       -- LSP
@@ -225,13 +197,6 @@ return {
           Snacks.picker.lsp_symbols()
         end,
         desc = "LSP Symbols",
-      },
-      {
-        "<leader>sS",
-        function()
-          Snacks.picker.lsp_workspace_symbols()
-        end,
-        desc = "LSP Workspace Symbols",
       },
 
       -- Other
