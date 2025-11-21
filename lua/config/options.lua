@@ -38,6 +38,7 @@ opt.listchars = {
 
 -- 使用鼠标
 opt.mouse = "a"
+opt.mousemoveevent = true
 
 -- 显示行数
 -- 显示相对行数
