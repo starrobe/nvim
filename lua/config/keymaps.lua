@@ -1,27 +1,28 @@
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true }
+local map = vim.keymap.set
 
-map("i", "<C-h>", "<Left>", opts)
-map("i", "<C-l>", "<Right>", opts)
-map("i", "<C-j>", "<Down>", opts)
-map("i", "<C-k>", "<Up>", opts)
+-- 插入模式下的方向键映射
+map("i", "<C-h>", "<Left>", { desc = "Move left" })
+map("i", "<C-l>", "<Right>", { desc = "Move right" })
+map("i", "<C-j>", "<Down>", { desc = "Move down" })
+map("i", "<C-k>", "<Up>", { desc = "Move up" })
 
-map("n", "<C-h>", "<C-w>h", opts)
-map("n", "<C-l>", "<C-w>l", opts)
-map("n", "<C-j>", "<C-w>j", opts)
-map("n", "<C-k>", "<C-w>k", opts)
+-- 窗口导航
+map("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
+map("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+map("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
+map("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
 
--- gv会重新选择上一次所选文本
-map("v", "<", "<gv", opts)
-map("v", ">", ">gv", opts)
+-- 缩进后保持选中
+map("v", "<", "<gv", { desc = "Indent left and reselect" })
+map("v", ">", ">gv", { desc = "Indent right and reselect" })
 
--- Buffer
+-- Buffer 管理
 map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New Buffer" })
 map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Delete Buffer" })
 map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" })
 
--- Window
+-- Window 管理
 map("n", "<leader>wd", "<C-w>c", { desc = "Close Window" })
 map("n", "<leader>wo", "<C-w>o", { desc = "Close other Window" })
 map("n", "<leader>wk", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -29,7 +30,7 @@ map("n", "<leader>wj", "<cmd>resize -2<cr>", { desc = "Decrease window height" }
 map("n", "<leader>wl", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 map("n", "<leader>wh", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
--- Diagnostic
-map("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Float Diagnostic" })
-map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Previous Diagnostic" })
-map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next Diagnostic" })
+-- Diagnostic 导航
+map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Float Diagnostic" })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })

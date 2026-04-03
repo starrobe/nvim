@@ -19,37 +19,6 @@ return {
       },
     },
   },
-  {
-    "akinsho/bufferline.nvim",
-    cond = false,
-    event = "VeryLazy",
-    opts = {
-      options = {
-        diagnostics = "nvim_lsp",
-        offsets = {
-          {
-            filetype = "snacks_layout_box",
-          },
-        },
-        indicator = {
-          style = "none",
-        },
-        diagnostics_indicator = function(count, level)
-          local diagnostic_signs = require("icons").diagnostic
-          local icon = level:match("error") and diagnostic_signs.Error .. " " or diagnostic_signs.Warn .. " "
-          return " " .. icon .. count
-        end,
-        -- show_buffer_icons = false,
-        show_buffer_close_icons = false,
-        separator_style = "slant",
-        hover = {
-          enabled = true,
-          delay = 200,
-          reveal = { "close" },
-        },
-      },
-    },
-  },
   { "nvim-tree/nvim-web-devicons", lazy = true },
   { "nvim-mini/mini.icons", lazy = true },
   { "MunifTanjim/nui.nvim", lazy = true },

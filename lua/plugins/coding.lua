@@ -57,15 +57,7 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-        providers = {
-          lazydev = {
-            name = "LazyDev",
-            module = "lazydev.integrations.blink",
-            -- make lazydev completions top priority (see `:h blink.cmp`)
-            score_offset = 100,
-          },
-        },
+        default = { "lsp", "path", "snippets", "buffer" },
       },
 
       -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -100,16 +92,6 @@ return {
       cmdline = { enabled = false },
     },
     opts_extend = { "sources.default" },
-  },
-  {
-    "folke/lazydev.nvim",
-    ft = "lua",
-    opts = {
-      library = {
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        { path = "snacks.nvim", words = { "Snacks" } },
-      },
-    },
   },
   {
     "stevearc/conform.nvim",
@@ -171,8 +153,5 @@ return {
         },
       },
     },
-    init = function()
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-    end,
   },
 }

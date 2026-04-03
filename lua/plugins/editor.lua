@@ -1,51 +1,5 @@
 return {
   {
-    "folke/trouble.nvim",
-    cmd = "Trouble",
-    opts = {
-      modes = {
-        preview_float = {
-          mode = "diagnostics",
-          preview = {
-            type = "float",
-            relative = "editor",
-            border = "rounded",
-            title = "Preview",
-            title_pos = "center",
-            position = { 0, -2 },
-            size = { width = 0.5, height = 0.5 },
-            zindex = 200,
-          },
-        },
-      },
-    },
-    keys = {
-      { "<leader>lt", "<cmd>Trouble todo toggle<cr>", desc = "Todo" },
-      { "<leader>ld", "<cmd>Trouble preview_float toggle<cr>", desc = "Diagnostics" },
-    },
-  },
-  {
-    "folke/todo-comments.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {},
-    keys = {
-      {
-        "]t",
-        function()
-          require("todo-comments").jump_next()
-        end,
-        desc = "Next todo comment",
-      },
-      {
-        "[t",
-        function()
-          require("todo-comments").jump_prev()
-        end,
-        desc = "Previous todo comment",
-      },
-    },
-  },
-  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
@@ -112,28 +66,6 @@ return {
           require("flash").toggle()
         end,
         desc = "Toggle Flash Search",
-      },
-    },
-  },
-  {
-    "MagicDuck/grug-far.nvim",
-    cmd = "GrugFar",
-    opts = {},
-    keys = {
-      {
-        "<leader>sr",
-        function()
-          local grug = require("grug-far")
-          local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
-          grug.open({
-            transient = true,
-            prefills = {
-              filesFilter = ext and ext ~= "" and "*." .. ext or nil,
-            },
-          })
-        end,
-        mode = { "n", "v" },
-        desc = "Search and Replace",
       },
     },
   },

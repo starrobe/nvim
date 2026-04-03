@@ -17,15 +17,6 @@ return {
       "mason-lspconfig.nvim",
     },
     config = function()
-      local has_blink, blink = pcall(require, "blink.cmp")
-
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        has_blink and blink.get_lsp_capabilities() or {}
-      )
-
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
@@ -36,12 +27,8 @@ return {
         end,
       })
 
-      -- https://neovim.io/doc/user/lsp.html#_lua-module:-vim.lsp.inlay_hint
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-
-      vim.lsp.config("*", {
-        capabilities = capabilities,
-      })
+      vim.lsp.inlay_hint.enable()
+      vim.lsp.config("*", {})
     end,
   },
 }

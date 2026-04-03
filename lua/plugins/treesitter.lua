@@ -1,7 +1,6 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
     lazy = false,
     build = ":TSUpdate",
     opts = {
@@ -22,15 +21,6 @@ return {
       sync_intall = true,
       highlight = {
         enable = true,
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
       },
     },
   },
