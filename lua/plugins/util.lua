@@ -6,7 +6,6 @@ return {
     lazy = false,
     opts = {
       bigfile = { enabled = true },
-      dim = { enable = true },
       explorer = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
@@ -22,16 +21,7 @@ return {
       scroll = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
-      toggle = { enabled = true },
     },
-    init = function()
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "VeryLazy",
-        callback = function()
-          Snacks.toggle.dim():map("<leader>ud")
-        end,
-      })
-    end,
     keys = {
       -- Top Pickers & Explorer
       {
@@ -78,24 +68,17 @@ return {
         end,
         desc = "Find Files",
       },
-      {
-        "<leader>fs",
-        function()
-          Snacks.picker.smart()
-        end,
-        desc = "Smart Find Files",
-      },
 
       -- Grep
       {
-        "<leader>sg",
+        "<leader>ss",
         function()
           Snacks.picker.grep()
         end,
         desc = "Grep",
       },
       {
-        "<leader>sG",
+        "<leader>sb",
         function()
           Snacks.picker.grep_buffers()
         end,
@@ -124,13 +107,6 @@ return {
           Snacks.picker.diagnostics()
         end,
         desc = "Diagnostics",
-      },
-      {
-        "<leader>sD",
-        function()
-          Snacks.picker.diagnostics_buffer()
-        end,
-        desc = "Buffer Diagnostics",
       },
       {
         "<leader>sh",
@@ -185,36 +161,11 @@ return {
         desc = "Goto Implementation",
       },
       {
-        "<leader>gy",
+        "<leader>gt",
         function()
           Snacks.picker.lsp_type_definitions()
         end,
-        desc = "Goto T[y]pe Definition",
-      },
-      {
-        "<leader>ss",
-        function()
-          Snacks.picker.lsp_symbols()
-        end,
-        desc = "LSP Symbols",
-      },
-
-      -- Other
-      {
-        "]]",
-        function()
-          Snacks.words.jump(vim.v.count1)
-        end,
-        desc = "Next Reference",
-        mode = { "n", "t" },
-      },
-      {
-        "[[",
-        function()
-          Snacks.words.jump(-vim.v.count1)
-        end,
-        desc = "Prev Reference",
-        mode = { "n", "t" },
+        desc = "Goto Type Definition",
       },
     },
   },

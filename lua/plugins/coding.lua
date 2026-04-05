@@ -5,16 +5,6 @@ return {
     opts = {},
   },
   {
-    "nvim-mini/mini.surround",
-    event = "VeryLazy",
-    opts = {},
-  },
-  {
-    "folke/ts-comments.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
-  {
     "saghen/blink.cmp",
     event = "InsertEnter",
 
@@ -100,14 +90,6 @@ return {
     keys = {
       {
         "<leader>cf",
-        function()
-          require("conform").format()
-        end,
-        mode = "n",
-        desc = "Code Format",
-      },
-      {
-        "<leader>\\",
         function()
           require("conform").format()
         end,

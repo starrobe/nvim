@@ -7,8 +7,6 @@ vim.g.maplocalleader = "\\"
 require("config.options")
 require("config.keymaps")
 
-local diagnostic_signs = require("icons").diagnostic
-
 vim.diagnostic.config({
   virtual_text = false,
   float = {
@@ -19,10 +17,10 @@ vim.diagnostic.config({
   },
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = diagnostic_signs.Error,
-      [vim.diagnostic.severity.HINT] = diagnostic_signs.Hint,
-      [vim.diagnostic.severity.INFO] = diagnostic_signs.Info,
-      [vim.diagnostic.severity.WARN] = diagnostic_signs.Warn,
+      [vim.diagnostic.severity.ERROR] = "󰈸",
+      [vim.diagnostic.severity.HINT] = "",
+      [vim.diagnostic.severity.INFO] = "󰌪",
+      [vim.diagnostic.severity.WARN] = "",
     },
   },
   severity_sort = true,

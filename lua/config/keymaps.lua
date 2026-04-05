@@ -32,5 +32,9 @@ map("n", "<leader>wh", "<cmd>vertical resize +2<cr>", { desc = "Increase window 
 
 -- Diagnostic 导航
 map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Float Diagnostic" })
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
-map("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+map("n", "[d", function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Previous Diagnostic" })
+map("n", "]d", function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Next Diagnostic" })

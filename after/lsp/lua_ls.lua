@@ -1,6 +1,9 @@
 return {
   settings = {
     Lua = {
+      diagnostics = {
+        globals = { "Snacks" },
+      },
       runtime = {
         version = "LuaJIT",
       },
