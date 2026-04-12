@@ -130,7 +130,7 @@ return {
         clang_format = {
           prepend_args = {
             "--style",
-            "{BasedOnStyle: LLVM, IndentWidth: 4}",
+            "{BasedOnStyle: LLVM, IndentWidth: 2}",
           },
         },
       },
