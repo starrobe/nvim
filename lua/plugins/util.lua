@@ -14,6 +14,14 @@ return {
         layout = {
           preset = "select",
         },
+        icons = {
+          diagnostics = {
+            Error = "󰈸 ",
+            Warn = " ",
+            Hint = " ",
+            Info = "󰌪 ",
+          },
+        },
       },
       notifier = { enabled = true },
       quickfile = { enabled = true },
