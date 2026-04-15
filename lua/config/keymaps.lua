@@ -54,3 +54,12 @@ map({ "c" }, "<c-s>", function() require("flash").toggle() end, { desc = "Toggle
 
 -- conform
 map("n", "<leader>cf", function() require("conform").format() end, { desc = "Code Format" })
+
+-- snacks.nvim
+map("n", "<leader><space>", function() Snacks.picker.files() end, { desc = "Find Files" })
+map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Find Buffers" })
+map("n", "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })
+map("n", "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
+map("n", "<leader>ss", function() Snacks.picker.grep() end, { desc = "Grep" })
+map("n", "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
+map("n", "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Pre Reference" })

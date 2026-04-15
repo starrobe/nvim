@@ -5,10 +5,12 @@ vim.pack.add({
   gh("folke/which-key.nvim"),
   gh("folke/flash.nvim"),
   gh("folke/snacks.nvim"),
+  gh("folke/noice.nvim"),
   gh("nvim-tree/nvim-web-devicons"),
   gh("nvim-mini/mini.icons"),
   gh("neovim/nvim-lspconfig"),
   gh("nvim-treesitter/nvim-treesitter"),
+  gh("MunifTanjim/nui.nvim"),
   {
     src = gh("saghen/blink.cmp"),
     version = vim.version.range("1.*"),
@@ -58,6 +60,15 @@ wk.add({
 
 -- lsp
 vim.lsp.enable({ "lua_ls", "clangd", "ty", "ruff" })
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    vim.keymap.set("n", "<leader>ch", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature Help" })
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover" })
+    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
+    vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code Action" })
+  end,
+})
 
 -- cmp
 require("blink.cmp").setup({
@@ -113,14 +124,72 @@ require("conform").setup({
 -- snacks.nvim
 require("snacks").setup({
   bigfile = { enabled = true },
-  explorer = { enabled = true },
   indent = { enabled = true },
   input = { enabled = true },
-  picker = { enabled = true },
+  picker = {
+    enabled = true,
+    layout = {
+      preset = "select",
+    },
+    icons = {
+      diagnostics = {
+        Error = "󰈸 ",
+        Warn = " ",
+        Hint = " ",
+        Info = "󰌪 ",
+      },
+    },
+  },
   notifier = { enabled = true },
   quickfile = { enabled = true },
   scope = { enabled = true },
   scroll = { enabled = true },
   statuscolumn = { enabled = true },
   words = { enabled = true },
+})
+
+-- noice.nvim
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true,         -- use a classic bottom cmdline for search
+    command_palette = true,       -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false,       -- add a border to hover docs and signature help
+  },
+})
+
+-- nvim-treesitter
+local ensure_installed = {
+  "bash",
+  "c",
+  "cpp",
+  "lua",
+  "markdown",
+  "markdown_inline",
+  "query",
+  "python",
+  "regex",
+  "rust",
+  "vim",
+  "vimdoc",
+}
+require("nvim-treesitter").install(ensure_installed)
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = ensure_installed,
+  callback = function()
+    vim.treesitter.start()
+    vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    vim.wo[0][0].foldmethod = "expr"
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
 })
