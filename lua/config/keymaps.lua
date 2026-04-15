@@ -44,3 +44,13 @@ end, { desc = "Previous Diagnostic" })
 map("n", "]d", function()
   vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Next Diagnostic" })
+
+-- flash.nvim
+map({ "n", "x", "o" }, "s", function() require("flash").jump() end, { desc = "Flash" })
+map({ "n", "x", "o" }, "S", function() require("flash").treesitter() end, { desc = "Flash Treesitter" })
+map({ "x", "o" }, "r", function() require("flash").treesitter_search() end, { desc = "Treesitter Search" })
+map("o", "R", function() require("flash").remote() end, { desc = "Flash" })
+map({ "c" }, "<c-s>", function() require("flash").toggle() end, { desc = "Toggle Flash Search" })
+
+-- conform
+map("n", "<leader>cf", function() require("conform").format() end, { desc = "Code Format" })
