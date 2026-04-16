@@ -24,7 +24,7 @@ opt.listchars = {
   trail = "•",
 }
 
--- 全局statusline
+-- statusline
 opt.laststatus = 3
 
 -- =============================================================================

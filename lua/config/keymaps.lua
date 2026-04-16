@@ -61,5 +61,17 @@ map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Find Bu
 map("n", "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })
 map("n", "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
 map("n", "<leader>ss", function() Snacks.picker.grep() end, { desc = "Grep" })
+map("n", "<leader>sn", function() Snacks.picker.notifications() end, { desc = "Notifications History" })
 map("n", "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
 map("n", "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Pre Reference" })
+
+-- lsp
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    vim.keymap.set("n", "<leader>ch", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature Help" })
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover" })
+    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
+    vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code Action" })
+  end,
+})

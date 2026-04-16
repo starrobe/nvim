@@ -2,6 +2,7 @@ local gh = function(x) return "https://github.com/" .. x end
 
 vim.pack.add({
   gh("folke/tokyonight.nvim"),
+  gh("ellisonleao/gruvbox.nvim"),
   gh("folke/which-key.nvim"),
   gh("folke/flash.nvim"),
   gh("folke/snacks.nvim"),
@@ -18,7 +19,8 @@ vim.pack.add({
   gh("stevearc/conform.nvim"),
 })
 
-vim.cmd [[colorscheme tokyonight]]
+vim.cmd.colorscheme("tokyonight")
+vim.cmd.packadd("nvim.undotree")
 
 
 vim.api.nvim_create_user_command("PackUpdate", function()
@@ -44,6 +46,10 @@ end, {})
 local wk = require("which-key")
 wk.setup({
   preset = "helix",
+  icons = {
+    -- 禁用所有mapping icons
+    mappings = false,
+  }
 })
 wk.add({
   {
@@ -60,15 +66,7 @@ wk.add({
 
 -- lsp
 vim.lsp.enable({ "lua_ls", "clangd", "ty", "ruff" })
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(ev)
-    vim.keymap.set("n", "<leader>ch", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature Help" })
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover" })
-    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
-    vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code Action" })
-  end,
-})
+
 
 -- cmp
 require("blink.cmp").setup({
@@ -86,6 +84,7 @@ require("blink.cmp").setup({
     menu = {
       draw = {
         treesitter = { "lsp" },
+        columns    = { { "label" }, { "label_description" } }
       },
     },
     documentation = {
@@ -132,6 +131,7 @@ require("snacks").setup({
       preset = "select",
     },
     icons = {
+      files = { enabled = false },
       diagnostics = {
         Error = "󰈸 ",
         Warn = " ",
