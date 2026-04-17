@@ -3,15 +3,14 @@ local gh = function(x) return "https://github.com/" .. x end
 vim.pack.add({
   gh("folke/tokyonight.nvim"),
   gh("ellisonleao/gruvbox.nvim"),
+  gh("slugbyte/lackluster.nvim"),
   gh("folke/which-key.nvim"),
   gh("folke/flash.nvim"),
   gh("folke/snacks.nvim"),
-  gh("folke/noice.nvim"),
   gh("nvim-tree/nvim-web-devicons"),
   gh("nvim-mini/mini.icons"),
   gh("neovim/nvim-lspconfig"),
   gh("nvim-treesitter/nvim-treesitter"),
-  gh("MunifTanjim/nui.nvim"),
   {
     src = gh("saghen/blink.cmp"),
     version = vim.version.range("1.*"),
@@ -19,7 +18,7 @@ vim.pack.add({
   gh("stevearc/conform.nvim"),
 })
 
-vim.cmd.colorscheme("tokyonight")
+vim.cmd.colorscheme("gruvbox")
 vim.cmd.packadd("nvim.undotree")
 
 
@@ -33,13 +32,10 @@ vim.api.nvim_create_user_command("PackClean", function()
       :map(function(x) return x.spec.name end)
       :totable()
   if #non_active_plugins == 0 then
-    vim.notify("没有插件被卸载。", vim.log.levels.INFO)
+    vim.notify("没有需要卸载的插件。", vim.log.levels.INFO)
     return
   end
   vim.pack.del(non_active_plugins)
-
-  local message = "以下插件已卸载:\n- " .. table.concat(non_active_plugins, "\n- ")
-  vim.notify(message, vim.log.levels.INFO)
 end, {})
 
 -- which-key.nvim
@@ -146,25 +142,6 @@ require("snacks").setup({
   scroll = { enabled = true },
   statuscolumn = { enabled = true },
   words = { enabled = true },
-})
-
--- noice.nvim
-require("noice").setup({
-  lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-    },
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    bottom_search = true,         -- use a classic bottom cmdline for search
-    command_palette = true,       -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false,       -- add a border to hover docs and signature help
-  },
 })
 
 -- nvim-treesitter
