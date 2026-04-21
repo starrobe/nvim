@@ -18,7 +18,7 @@ vim.pack.add({
   gh("stevearc/conform.nvim"),
 })
 
-vim.cmd.colorscheme("gruvbox")
+vim.cmd.colorscheme("tokyonight")
 vim.cmd.packadd("nvim.undotree")
 
 
