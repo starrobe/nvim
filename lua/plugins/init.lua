@@ -3,7 +3,6 @@ local gh = function(x) return "https://github.com/" .. x end
 vim.pack.add({
   gh("folke/tokyonight.nvim"),
   gh("ellisonleao/gruvbox.nvim"),
-  gh("slugbyte/lackluster.nvim"),
   gh("folke/which-key.nvim"),
   gh("folke/flash.nvim"),
   gh("folke/snacks.nvim"),
@@ -16,6 +15,7 @@ vim.pack.add({
     version = vim.version.range("1.*"),
   },
   gh("stevearc/conform.nvim"),
+  gh("lewis6991/gitsigns.nvim")
 })
 
 vim.cmd.colorscheme("tokyonight")
