@@ -10,10 +10,8 @@ vim.pack.add({
   gh("nvim-mini/mini.icons"),
   gh("neovim/nvim-lspconfig"),
   gh("nvim-treesitter/nvim-treesitter"),
-  {
-    src = gh("saghen/blink.cmp"),
-    version = vim.version.range("1.*"),
-  },
+  gh("saghen/blink.lib"),
+  gh("saghen/blink.cmp"),
   gh("stevearc/conform.nvim"),
   gh("lewis6991/gitsigns.nvim"),
   gh("MunifTanjim/nui.nvim"),
@@ -66,7 +64,9 @@ wk.add({
 vim.lsp.enable({ "lua_ls", "clangd", "ty", "ruff" })
 
 -- cmp
-require("blink.cmp").setup({
+local cmp = require("blink.cmp")
+cmp.build():wait(60000)
+cmp.setup({
   keymap = {
     preset = "enter",
     ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
@@ -87,7 +87,7 @@ require("blink.cmp").setup({
     },
     documentation = {
       auto_show = true,
-      auto_show_delay_ms = 200,
+      auto_show_delay_ms = 500,
       window = {
         winblend = vim.o.winblend,
       },
