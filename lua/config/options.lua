@@ -4,6 +4,9 @@ local opt = vim.opt
 -- 编辑器外观
 -- =============================================================================
 
+-- 开启24位真彩色
+opt.termguicolors = true
+
 -- 显示行号和相对行号
 opt.number = true
 opt.relativenumber = true
@@ -75,6 +78,12 @@ opt.completeopt = "menu,menuone,noselect"
 
 -- 补全菜单最大高度
 opt.pumheight = 12
+
+
+-- 补全菜单透明度
+opt.pumblend = 18
+--浮动窗口透明度
+opt.winblend = 18
 
 -- =============================================================================
 -- 窗口和分屏

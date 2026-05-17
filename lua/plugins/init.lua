@@ -17,7 +17,7 @@ vim.pack.add({
   gh("stevearc/conform.nvim"),
   gh("lewis6991/gitsigns.nvim"),
   gh("MunifTanjim/nui.nvim"),
-  gh("folke/noice.nvim")
+  gh("folke/noice.nvim"),
 })
 
 vim.cmd.colorscheme("tokyonight")
@@ -65,7 +65,6 @@ wk.add({
 -- lsp
 vim.lsp.enable({ "lua_ls", "clangd", "ty", "ruff" })
 
-
 -- cmp
 require("blink.cmp").setup({
   keymap = {
@@ -80,6 +79,7 @@ require("blink.cmp").setup({
       },
     },
     menu = {
+      winblend = vim.o.winblend,
       draw = {
         treesitter = { "lsp" },
         columns    = { { "label" }, { "label_description" } }
@@ -88,8 +88,17 @@ require("blink.cmp").setup({
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 200,
+      window = {
+        winblend = vim.o.winblend,
+      },
     },
   },
+  -- signature = {
+  --   enabled = true,
+  --   window = {
+  --     winblend = 24,
+  --   },
+  -- },
   -- cmdline = { enabled = false },
 })
 
@@ -102,11 +111,6 @@ require("conform").setup({
   },
   default_format_opts = {
     lsp_format = "fallback",
-  },
-  format_on_save = {
-    -- I recommend these options. See :help conform.format for details.
-    lsp_format = "fallback",
-    timeout_ms = 500,
   },
   formatters = {
     clang_format = {
