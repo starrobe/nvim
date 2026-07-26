@@ -8,14 +8,14 @@ local opt = vim.opt
 opt.termguicolors = true
 
 -- 显示行号和相对行号
-opt.number = true
-opt.relativenumber = true
+-- opt.number = true
+-- opt.relativenumber = true
 
 -- 当前行高亮
-opt.cursorline = true
+-- opt.cursorline = true
 
 -- 第80列高亮线
-opt.colorcolumn = "80"
+-- opt.colorcolumn = "80"
 
 -- 显示不可见字符
 opt.list = true
@@ -28,7 +28,7 @@ opt.listchars = {
 }
 
 -- statusline
-opt.laststatus = 3
+opt.laststatus = 0
 
 -- =============================================================================
 -- 搜索配置

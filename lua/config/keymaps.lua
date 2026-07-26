@@ -61,7 +61,7 @@ map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Find Bu
 map("n", "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })
 map("n", "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
 map("n", "<leader>ss", function() Snacks.picker.grep() end, { desc = "Grep" })
-map("n", "<leader>sn", function() Snacks.picker.notifications() end, { desc = "Notifications History" })
+map("n", "<leader>sn", function() Snacks.notifier.show_history() end, { desc = "Notifications History" })
 map("n", "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
 map("n", "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Pre Reference" })
 
