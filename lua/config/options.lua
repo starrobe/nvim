@@ -116,7 +116,11 @@ opt.mouse = "a"
 -- =============================================================================
 
 -- 与系统剪切板同步
-opt.clipboard = "unnamedplus"
+vim.api.nvim_create_autocmd('UIEnter', {
+  callback = function()
+    vim.o.clipboard = 'unnamedplus'
+  end,
+})
 
 -- =============================================================================
 -- 撤销和历史

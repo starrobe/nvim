@@ -65,7 +65,7 @@ vim.lsp.enable({ "lua_ls", "clangd", "ty", "ruff" })
 
 -- cmp
 local cmp = require("blink.cmp")
-cmp.build():pwait(60000)
+cmp.build():pwait()
 cmp.setup({
   keymap = {
     preset = "enter",
