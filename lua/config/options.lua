@@ -7,6 +7,11 @@ local opt = vim.opt
 -- 开启24位真彩色
 opt.termguicolors = true
 
+--自定义光标闪烁
+opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
+    .. ",a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
+    .. ",sm:block-blinkwait175-blinkoff150-blinkon175"
+
 -- 显示行号和相对行号
 -- opt.number = true
 -- opt.relativenumber = true

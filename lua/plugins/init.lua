@@ -19,7 +19,7 @@ vim.pack.add({
 })
 
 vim.cmd.colorscheme("tokyonight-storm")
-vim.cmd.packadd("nvim.undotree")
+-- vim.cmd.packadd("nvim.undotree")
 
 
 vim.api.nvim_create_user_command("PackUpdate", function()
