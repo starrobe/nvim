@@ -1,6 +1,6 @@
 # My Neovim Config
 
-一个基于 Lua、面向 C/C++ / Python / Rust / Lua 开发的极简 Neovim 配置，使用 Neovim 原生 `vim.pack` 管理插件。
+个人使用的Neovim 配置。
 
 ![screenshot](https://img.starrobe.cn/screenshot/nvim.png)
 
