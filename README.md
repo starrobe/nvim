@@ -1,18 +1,8 @@
-# My Neovim Config
+# Neovim Config
 
 个人使用的Neovim 配置。
 
 ![screenshot](https://img.starrobe.cn/screenshot/nvim.png)
-
-## ✨ 特性
-
-- 🚀 **原生插件管理**：基于 Neovim 内置的 `vim.pack`，无额外管理器依赖，启动快
-- 🎨 **tokyonight-storm** 主题 + 半透明浮窗，极简状态栏（`statuscolumn` 由 snacks 接管）
-- ⌨️ **blink.cmp** 补全，`enter` 预设 + Tab/S-Tab 导航
-- 🔍 **snacks.nvim** 统一 picker / notifier / words / grep 体验
-- 🏃 **flash.nvim** 快速跳转，`s` / `S` / `R` 直达
-- 🧹 **conform.nvim** 统一格式化（clang-format / ruff）
-- 🌳 **nvim-treesitter** 语法高亮 + 折叠
 
 ## 📦 插件
 
