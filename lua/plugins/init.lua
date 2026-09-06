@@ -21,6 +21,30 @@ vim.pack.add({
 vim.cmd.colorscheme("tokyonight-storm")
 -- vim.cmd.packadd("nvim.undotree")
 
+vim.api.nvim_create_user_command('DiffOrig', function()
+  -- 获取当前缓冲区的文件名（确保已存盘）
+  local filename = vim.api.nvim_buf_get_name(0)
+  if filename == '' then
+    vim.notify('Current buffer has no file name, please save first.', vim.log.levels.ERROR)
+    return
+  end
+
+  -- 垂直分割新窗口，设置 buftype=nofile
+  vim.cmd('vert new')
+  vim.cmd('set buftype=nofile')
+
+  -- 读取原文件内容（使用 ++edit 避免编码警告）
+  vim.cmd('read ++edit ' .. vim.fn.fnameescape(filename))
+  -- 删除第一行空行
+  vim.cmd('0d_')
+
+  -- 启用 diff
+  vim.cmd('diffthis')
+  vim.cmd('wincmd p')
+  vim.cmd('diffthis')
+end, {
+  desc = 'Diff current buffer against saved file'
+})
 
 vim.api.nvim_create_user_command("PackUpdate", function()
   vim.pack.update()
@@ -118,7 +142,7 @@ require("conform").setup({
     clang_format = {
       prepend_args = {
         "--style",
-        "{BasedOnStyle: LLVM, IndentWidth: 2}",
+        "{BasedOnStyle: LLVM, IndentWidth: 4}",
       },
     },
   },

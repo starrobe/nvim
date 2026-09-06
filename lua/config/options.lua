@@ -54,9 +54,9 @@ opt.hlsearch = false
 opt.expandtab = true
 
 -- Tab显示宽度和缩进宽度
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.softtabstop = 2
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.softtabstop = 4
 
 -- 缩进对齐到shiftwidth的整数倍
 opt.shiftround = true
