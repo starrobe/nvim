@@ -52,8 +52,8 @@ map({ "x", "o" }, "R", function() require("flash").treesitter_search() end, { de
 map("o", "r", function() require("flash").remote() end, { desc = "Remote Flash" })
 map({ "c" }, "<c-s>", function() require("flash").toggle() end, { desc = "Toggle Flash Search" })
 
--- conform
-map("n", "<leader>cf", function() require("conform").format() end, { desc = "Code Format" })
+-- 格式化（按语言分发，见 lua/config/format.lua）
+map("n", "<leader>cf", function() require("config.format").format() end, { desc = "Code Format" })
 
 -- snacks.nvim
 map("n", "<leader><space>", function() Snacks.picker.files() end, { desc = "Find Files" })

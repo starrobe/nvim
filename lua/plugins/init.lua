@@ -10,7 +10,6 @@ vim.pack.add({
   gh("nvim-mini/mini.icons"),
   gh("neovim/nvim-lspconfig"),
   gh("nvim-treesitter/nvim-treesitter"),
-  gh("stevearc/conform.nvim"),
   gh("lewis6991/gitsigns.nvim"),
   -- gh("MunifTanjim/nui.nvim"),
   -- gh("folke/noice.nvim"),
@@ -99,26 +98,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end
   end,
-})
-
--- conform.nvim
-require("conform").setup({
-  formatters_by_ft = {
-    c = { "clang_format" },
-    cpp = { "clang_format" },
-    python = { "ruff" },
-  },
-  default_format_opts = {
-    lsp_format = "fallback",
-  },
-  formatters = {
-    clang_format = {
-      prepend_args = {
-        "--style",
-        "{BasedOnStyle: LLVM, IndentWidth: 4}",
-      },
-    },
-  },
 })
 
 -- snacks.nvim

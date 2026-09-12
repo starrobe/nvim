@@ -12,7 +12,7 @@
 | 补全 | 原生 `vim.lsp.completion`（内置） |
 | LSP | nvim-lspconfig（lua_ls / clangd / ty / ruff） |
 | 语法 | nvim-treesitter |
-| 格式化 | conform.nvim |
+| 格式化 | 原生 `vim.lsp.buf.format()`（内置） |
 | 导航 | flash.nvim、which-key.nvim |
 | UI | snacks.nvim、mini.icons、nvim-web-devicons |
 | Git | gitsigns.nvim |
@@ -20,7 +20,7 @@
 ## 🛠 依赖
 
 - **Neovim** ≥ 0.11（依赖内置 `vim.pack`）
-- 系统工具：`clangd`、`clang-format`、`ruff`（按需）
+- 系统工具：`clangd`、`ruff`、`stylua`（按需）
 
 ## 📥 安装
 
