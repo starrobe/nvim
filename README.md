@@ -9,7 +9,7 @@
 | 类别 | 插件 |
 |------|------|
 | 主题 | tokyonight.nvim、gruvbox.nvim |
-| 补全 | blink.cmp、blink.lib |
+| 补全 | 原生 `vim.lsp.completion`（内置） |
 | LSP | nvim-lspconfig（lua_ls / clangd / ty / ruff） |
 | 语法 | nvim-treesitter |
 | 格式化 | conform.nvim |
@@ -42,6 +42,9 @@ git clone <your-repo-url> ~/.config/nvim
 | 按键 | 功能 |
 |------|------|
 | `<C-h/j/k/l>` | 窗口 / 光标方向导航 |
+| `<C-Space>` | 触发补全 |
+| `Tab` / `S-Tab` | 补全列表上下移动 / snippet 跳转 |
+| `Enter` | 确认补全项 |
 | `<leader>bn` / `<leader>bd` | 新建 / 删除 Buffer |
 | `[b` / `]b` | 上一个 / 下一个 Buffer |
 | `<leader>wd` / `<leader>wo` | 关闭窗口 / 关闭其他窗口 |

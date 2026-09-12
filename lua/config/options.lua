@@ -79,7 +79,7 @@ opt.foldlevelstart = 99
 -- =============================================================================
 
 -- 补全菜单配置
-opt.completeopt = "menu,menuone,noselect"
+opt.completeopt = "menu,menuone,noselect,popup"
 
 -- 补全菜单最大高度
 opt.pumheight = 12

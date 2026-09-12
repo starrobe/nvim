@@ -66,6 +66,30 @@ map("n", "<leader>sn", function() Snacks.notifier.show_history() end, { desc = "
 map("n", "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
 map("n", "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Pre Reference" })
 
+-- 补全（原生 LSP completion）
+-- <C-Space> 在多数终端会被发送为 NUL（<C-@>），两者都映射以确保能触发
+map("i", "<C-Space>", "<C-x><C-o>", { desc = "Trigger completion" })
+map("i", "<C-@>", "<C-x><C-o>", { desc = "Trigger completion (C-Space fallback)" })
+
+-- Enter 确认补全项（原生默认确认键是 <C-y>，这里改用 Enter）
+map("i", "<CR>", function()
+  return vim.fn.pumvisible() == 1 and "<C-y>" or "<CR>"
+end, { expr = true, desc = "Accept completion" })
+
+-- Tab / S-Tab：补全列表上下移动 → snippet 占位符跳转 → 退化为 Tab
+local function completion_tab_next()
+  if vim.fn.pumvisible() == 1 then return "<C-n>" end
+  if vim.snippet.active({ direction = 1 }) then return "<Cmd>lua vim.snippet.jump(1)<CR>" end
+  return "<Tab>"
+end
+local function completion_tab_prev()
+  if vim.fn.pumvisible() == 1 then return "<C-p>" end
+  if vim.snippet.active({ direction = -1 }) then return "<Cmd>lua vim.snippet.jump(-1)<CR>" end
+  return "<Tab>"
+end
+map({ "i", "s" }, "<Tab>", completion_tab_next, { expr = true, silent = true, desc = "Completion next / snippet jump" })
+map({ "i", "s" }, "<S-Tab>", completion_tab_prev, { expr = true, silent = true, desc = "Completion prev / snippet jump back" })
+
 -- lsp
 -- vim.api.nvim_create_autocmd("LspAttach", {
 --   group = vim.api.nvim_create_augroup("UserLspConfig", {}),

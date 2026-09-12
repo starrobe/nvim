@@ -10,8 +10,6 @@ vim.pack.add({
   gh("nvim-mini/mini.icons"),
   gh("neovim/nvim-lspconfig"),
   gh("nvim-treesitter/nvim-treesitter"),
-  gh("saghen/blink.lib"),
-  gh("saghen/blink.cmp"),
   gh("stevearc/conform.nvim"),
   gh("lewis6991/gitsigns.nvim"),
   -- gh("MunifTanjim/nui.nvim"),
@@ -87,45 +85,20 @@ wk.add({
 -- lsp
 vim.lsp.enable({ "lua_ls", "clangd", "ty", "ruff" })
 
--- cmp
-local cmp = require("blink.cmp")
-cmp.build():pwait()
-cmp.setup({
-  keymap = {
-    preset = "enter",
-    ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
-    ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
-  },
-  completion = {
-    list = {
-      selection = {
-        preselect = false,
-        auto_insert = true
-      },
-    },
-    menu = {
-      auto_show = false,
-      winblend = vim.o.winblend,
-      draw = {
-        treesitter = { "lsp" },
-        columns = { { 'label', 'label_description' } }
-      },
-    },
-    documentation = {
-      auto_show = true,
-      auto_show_delay_ms = 500,
-      window = {
-        winblend = vim.o.winblend,
-      },
-    },
-  },
-  -- signature = {
-  --   enabled = true,
-  --   window = {
-  --     winblend = 24,
-  --   },
-  -- },
-  cmdline = { enabled = false },
+-- 原生 LSP 补全（自动触发）
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client and client:supports_method("textDocument/completion") then
+      vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, {
+        autotrigger = true,
+        -- 去掉 kind（Keyword/Snippet 等），保留单词和 menu（类型/签名说明）
+        convert = function(item)
+          return { abbr = item.label, kind = "" }
+        end,
+      })
+    end
+  end,
 })
 
 -- conform.nvim
