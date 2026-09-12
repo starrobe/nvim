@@ -90,7 +90,7 @@ wk.add({
 })
 
 -- lsp
-vim.lsp.enable({ "lua_ls", "clangd", "ty", "ruff" })
+vim.lsp.enable({ "lua_ls", "clangd", "ty", "ruff", "ts_ls", "marksman" })
 
 -- 原生 LSP 补全（自动触发）
 vim.api.nvim_create_autocmd("LspAttach", {

@@ -10,9 +10,9 @@
 |------|------|
 | 主题 | tokyonight.nvim、gruvbox.nvim |
 | 补全 | 原生 `vim.lsp.completion`（内置） |
-| LSP | nvim-lspconfig（lua_ls / clangd / ty / ruff） |
+| LSP | nvim-lspconfig（lua_ls / clangd / ty / ruff / ts_ls / marksman） |
 | 语法 | nvim-treesitter |
-| 格式化 | 原生 `vim.lsp.buf.format()`（内置） |
+| 格式化 | stylua（Lua）、oxfmt（JS/TS/Vue）、LSP format（其他） |
 | 导航 | flash.nvim、which-key.nvim |
 | UI | snacks.nvim、mini.icons、nvim-web-devicons |
 | Git | gitsigns.nvim |
@@ -20,7 +20,7 @@
 ## 🛠 依赖
 
 - **Neovim** ≥ 0.11（依赖内置 `vim.pack`）
-- 系统工具：`clangd`、`ruff`、`stylua`（按需）
+- 系统工具：`clangd`、`ruff`、`stylua`、`oxfmt`、`typescript-language-server`（按需）
 
 ## 📥 安装
 
