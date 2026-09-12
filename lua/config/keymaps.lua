@@ -46,14 +46,26 @@ map("n", "]d", function()
 end, { desc = "Next Diagnostic" })
 
 -- flash.nvim
-map({ "n", "x", "o" }, "s", function() require("flash").jump() end, { desc = "Flash" })
-map({ "n", "x", "o" }, "S", function() require("flash").treesitter() end, { desc = "Flash Treesitter" })
-map({ "x", "o" }, "R", function() require("flash").treesitter_search() end, { desc = "Treesitter Search" })
-map("o", "r", function() require("flash").remote() end, { desc = "Remote Flash" })
-map({ "c" }, "<c-s>", function() require("flash").toggle() end, { desc = "Toggle Flash Search" })
+map({ "n", "x", "o" }, "s", function()
+  require("flash").jump()
+end, { desc = "Flash" })
+map({ "n", "x", "o" }, "S", function()
+  require("flash").treesitter()
+end, { desc = "Flash Treesitter" })
+map({ "x", "o" }, "R", function()
+  require("flash").treesitter_search()
+end, { desc = "Treesitter Search" })
+map("o", "r", function()
+  require("flash").remote()
+end, { desc = "Remote Flash" })
+map({ "c" }, "<c-s>", function()
+  require("flash").toggle()
+end, { desc = "Toggle Flash Search" })
 
 -- 格式化（按语言分发，见 lua/config/format.lua）
-map("n", "<leader>cf", function() require("config.format").format() end, { desc = "Code Format" })
+map("n", "<leader>cf", function()
+  require("config.format").format()
+end, { desc = "Code Format" })
 
 -- 切换 inlay hints
 map("n", "<leader>uh", function()
@@ -61,15 +73,33 @@ map("n", "<leader>uh", function()
 end, { desc = "Toggle Inlay Hints" })
 
 -- snacks.nvim
-map("n", "<leader><space>", function() Snacks.picker.files() end, { desc = "Find Files" })
-map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Find Buffers" })
-map("n", "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })
-map("n", "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
-map("n", "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep" })
-map({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word" })
-map("n", "<leader>sn", function() Snacks.notifier.show_history() end, { desc = "Notifications History" })
-map("n", "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
-map("n", "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Pre Reference" })
+map("n", "<leader><space>", function()
+  Snacks.picker.files()
+end, { desc = "Find Files" })
+map("n", "<leader>fb", function()
+  Snacks.picker.buffers()
+end, { desc = "Find Buffers" })
+map("n", "<leader>sh", function()
+  Snacks.picker.help()
+end, { desc = "Help Pages" })
+map("n", "<leader>sd", function()
+  Snacks.picker.diagnostics()
+end, { desc = "Diagnostics" })
+map("n", "<leader>sg", function()
+  Snacks.picker.grep()
+end, { desc = "Grep" })
+map({ "n", "x" }, "<leader>sw", function()
+  Snacks.picker.grep_word()
+end, { desc = "Visual selection or word" })
+map("n", "<leader>sn", function()
+  Snacks.notifier.show_history()
+end, { desc = "Notifications History" })
+map("n", "]]", function()
+  Snacks.words.jump(vim.v.count1)
+end, { desc = "Next Reference" })
+map("n", "[[", function()
+  Snacks.words.jump(-vim.v.count1)
+end, { desc = "Pre Reference" })
 
 -- 补全（原生 LSP completion）
 -- <C-Space> 在多数终端会被发送为 NUL（<C-@>），两者都映射以确保能触发
@@ -83,17 +113,30 @@ end, { expr = true, desc = "Accept completion" })
 
 -- Tab / S-Tab：补全列表上下移动 → snippet 占位符跳转 → 退化为 Tab
 local function completion_tab_next()
-  if vim.fn.pumvisible() == 1 then return "<C-n>" end
-  if vim.snippet.active({ direction = 1 }) then return "<Cmd>lua vim.snippet.jump(1)<CR>" end
+  if vim.fn.pumvisible() == 1 then
+    return "<C-n>"
+  end
+  if vim.snippet.active({ direction = 1 }) then
+    return "<Cmd>lua vim.snippet.jump(1)<CR>"
+  end
   return "<Tab>"
 end
 local function completion_tab_prev()
-  if vim.fn.pumvisible() == 1 then return "<C-p>" end
-  if vim.snippet.active({ direction = -1 }) then return "<Cmd>lua vim.snippet.jump(-1)<CR>" end
+  if vim.fn.pumvisible() == 1 then
+    return "<C-p>"
+  end
+  if vim.snippet.active({ direction = -1 }) then
+    return "<Cmd>lua vim.snippet.jump(-1)<CR>"
+  end
   return "<Tab>"
 end
 map({ "i", "s" }, "<Tab>", completion_tab_next, { expr = true, silent = true, desc = "Completion next / snippet jump" })
-map({ "i", "s" }, "<S-Tab>", completion_tab_prev, { expr = true, silent = true, desc = "Completion prev / snippet jump back" })
+map(
+  { "i", "s" },
+  "<S-Tab>",
+  completion_tab_prev,
+  { expr = true, silent = true, desc = "Completion prev / snippet jump back" }
+)
 
 -- lsp
 -- vim.api.nvim_create_autocmd("LspAttach", {

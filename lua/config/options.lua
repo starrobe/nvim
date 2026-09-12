@@ -9,8 +9,8 @@ opt.termguicolors = true
 
 --自定义光标闪烁
 opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
-    .. ",a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
-    .. ",sm:block-blinkwait175-blinkoff150-blinkon175"
+  .. ",a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
+  .. ",sm:block-blinkwait175-blinkoff150-blinkon175"
 
 -- 显示行号和相对行号
 -- opt.number = true
@@ -84,7 +84,6 @@ opt.completeopt = "menu,menuone,noselect,popup"
 -- 补全菜单最大高度
 opt.pumheight = 12
 
-
 -- 补全菜单透明度
 opt.pumblend = 12
 --浮动窗口透明度
@@ -121,9 +120,9 @@ opt.mouse = "a"
 -- =============================================================================
 
 -- 与系统剪切板同步
-vim.api.nvim_create_autocmd('UIEnter', {
+vim.api.nvim_create_autocmd("UIEnter", {
   callback = function()
-    vim.o.clipboard = 'unnamedplus'
+    vim.o.clipboard = "unnamedplus"
   end,
 })
 

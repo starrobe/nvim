@@ -1,4 +1,6 @@
-local gh = function(x) return "https://github.com/" .. x end
+local gh = function(x)
+  return "https://github.com/" .. x
+end
 
 vim.pack.add({
   gh("folke/tokyonight.nvim"),
@@ -18,29 +20,29 @@ vim.pack.add({
 vim.cmd.colorscheme("tokyonight-storm")
 -- vim.cmd.packadd("nvim.undotree")
 
-vim.api.nvim_create_user_command('DiffOrig', function()
+vim.api.nvim_create_user_command("DiffOrig", function()
   -- 获取当前缓冲区的文件名（确保已存盘）
   local filename = vim.api.nvim_buf_get_name(0)
-  if filename == '' then
-    vim.notify('Current buffer has no file name, please save first.', vim.log.levels.ERROR)
+  if filename == "" then
+    vim.notify("Current buffer has no file name, please save first.", vim.log.levels.ERROR)
     return
   end
 
   -- 垂直分割新窗口，设置 buftype=nofile
-  vim.cmd('vert new')
-  vim.cmd('set buftype=nofile')
+  vim.cmd("vert new")
+  vim.cmd("set buftype=nofile")
 
   -- 读取原文件内容（使用 ++edit 避免编码警告）
-  vim.cmd('read ++edit ' .. vim.fn.fnameescape(filename))
+  vim.cmd("read ++edit " .. vim.fn.fnameescape(filename))
   -- 删除第一行空行
-  vim.cmd('0d_')
+  vim.cmd("0d_")
 
   -- 启用 diff
-  vim.cmd('diffthis')
-  vim.cmd('wincmd p')
-  vim.cmd('diffthis')
+  vim.cmd("diffthis")
+  vim.cmd("wincmd p")
+  vim.cmd("diffthis")
 end, {
-  desc = 'Diff current buffer against saved file'
+  desc = "Diff current buffer against saved file",
 })
 
 vim.api.nvim_create_user_command("PackUpdate", function()
@@ -48,10 +50,15 @@ vim.api.nvim_create_user_command("PackUpdate", function()
 end, {})
 
 vim.api.nvim_create_user_command("PackClean", function()
-  local non_active_plugins = vim.iter(vim.pack.get())
-      :filter(function(x) return not x.active end)
-      :map(function(x) return x.spec.name end)
-      :totable()
+  local non_active_plugins = vim
+    .iter(vim.pack.get())
+    :filter(function(x)
+      return not x.active
+    end)
+    :map(function(x)
+      return x.spec.name
+    end)
+    :totable()
   if #non_active_plugins == 0 then
     vim.notify("没有需要卸载的插件。", vim.log.levels.INFO)
     return
@@ -66,20 +73,20 @@ wk.setup({
   icons = {
     -- 禁用所有mapping icons
     mappings = false,
-  }
+  },
 })
 wk.add({
   {
     mode = { "n", "v" },
-    { "]",         group = "next" },
-    { "[",         group = "previous" },
+    { "]", group = "next" },
+    { "[", group = "previous" },
     { "<leader>b", group = "buffer" },
     { "<leader>c", group = "code" },
     { "<leader>f", group = "find" },
     { "<leader>s", group = "search" },
     { "<leader>u", group = "toggle" },
     { "<leader>w", group = "windows" },
-  }
+  },
 })
 
 -- lsp
