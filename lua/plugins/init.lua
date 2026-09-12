@@ -77,6 +77,7 @@ wk.add({
     { "<leader>c", group = "code" },
     { "<leader>f", group = "find" },
     { "<leader>s", group = "search" },
+    { "<leader>u", group = "toggle" },
     { "<leader>w", group = "windows" },
   }
 })
@@ -99,9 +100,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
-
--- 原生 LSP inlay hints（默认开启）
-vim.lsp.inlay_hint.enable(true)
 
 -- snacks.nvim
 require("snacks").setup({
