@@ -103,8 +103,12 @@ end, { desc = "Pre Reference" })
 
 -- 补全（原生 LSP completion）
 -- <C-Space> 在多数终端会被发送为 NUL（<C-@>），两者都映射以确保能触发
-map("i", "<C-Space>", "<C-x><C-o>", { desc = "Trigger completion" })
-map("i", "<C-@>", "<C-x><C-o>", { desc = "Trigger completion (C-Space fallback)" })
+map("i", "<C-Space>", function()
+  vim.lsp.completion.get()
+end, { desc = "Trigger completion" })
+map("i", "<C-@>", function()
+  vim.lsp.completion.get()
+end, { desc = "Trigger completion (C-Space fallback)" })
 
 -- Enter 确认补全项（原生默认确认键是 <C-y>，这里改用 Enter）
 map("i", "<CR>", function()
