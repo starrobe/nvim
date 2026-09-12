@@ -100,6 +100,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+-- 原生 LSP inlay hints（默认开启）
+vim.lsp.inlay_hint.enable(true)
+
 -- snacks.nvim
 require("snacks").setup({
   bigfile = { enabled = true },

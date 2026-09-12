@@ -55,6 +55,11 @@ map({ "c" }, "<c-s>", function() require("flash").toggle() end, { desc = "Toggle
 -- 格式化（按语言分发，见 lua/config/format.lua）
 map("n", "<leader>cf", function() require("config.format").format() end, { desc = "Code Format" })
 
+-- 切换 inlay hints
+map("n", "<leader>uh", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle Inlay Hints" })
+
 -- snacks.nvim
 map("n", "<leader><space>", function() Snacks.picker.files() end, { desc = "Find Files" })
 map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Find Buffers" })
