@@ -125,7 +125,7 @@ cmp.setup({
   --     winblend = 24,
   --   },
   -- },
-  -- cmdline = { enabled = false },
+  cmdline = { enabled = false },
 })
 
 -- conform.nvim
