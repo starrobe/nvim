@@ -67,11 +67,6 @@ map("n", "<leader>cf", function()
   require("config.format").format()
 end, { desc = "Code Format" })
 
--- 切换 inlay hints
-map("n", "<leader>uh", function()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end, { desc = "Toggle Inlay Hints" })
-
 -- snacks.nvim
 map("n", "<leader><space>", function()
   Snacks.picker.files()

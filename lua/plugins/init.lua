@@ -84,7 +84,7 @@ wk.add({
     { "<leader>c", group = "code" },
     { "<leader>f", group = "find" },
     { "<leader>s", group = "search" },
-    { "<leader>u", group = "toggle" },
+    { "<leader>u", group = "ui" },
     { "<leader>w", group = "windows" },
   },
 })
@@ -129,6 +129,8 @@ require("snacks").setup({
   statuscolumn = { enabled = true },
   words = { enabled = true },
 })
+Snacks.toggle.inlay_hints():map("<leader>uh")
+Snacks.toggle.indent():map("<leader>ug")
 
 -- nvim-treesitter
 local ensure_installed = {
