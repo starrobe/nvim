@@ -172,11 +172,25 @@ require("noice").setup({
   },
   -- you can enable a preset for easier configuration
   presets = {
-    bottom_search = true,         -- use a classic bottom cmdline for search
-    command_palette = true,      -- position the cmdline and popupmenu together
+    bottom_search = true, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
     long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false,       -- add a border to hover docs and signature help
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
+
+  -- Neovim 0.12 emits shell_cmd/shell_out/shell_err/shell_ret for `:!` output
+  -- (msg_show.return_prompt was removed). The default routes don't match these
+  -- kinds, so `:!ls` output was swallowed. Route them to a popup to show it.
+  routes = {
+    {
+      view = "split",
+      filter = {
+        event = "msg_show",
+        kind = { "shell_cmd", "shell_out", "shell_err", "shell_ret" },
+      },
+      opts = { title = "Shell" },
+    },
   },
 
   -- cmdline = {
