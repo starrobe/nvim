@@ -13,12 +13,12 @@ opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
   .. ",sm:block-blinkwait175-blinkoff150-blinkon175"
 
 -- 显示行号和相对行号
-opt.number = true
-opt.relativenumber = true
+-- opt.number = true
+-- opt.relativenumber = true
 
 -- 当前行高亮
-opt.cursorline = true
-opt.cursorlineopt = "number"
+-- opt.cursorline = true
+-- opt.cursorlineopt = "number"
 
 -- 第80列高亮线
 -- opt.colorcolumn = "80"
@@ -80,7 +80,7 @@ opt.foldlevelstart = 99
 opt.completeopt = "menu,menuone,noselect,popup"
 
 -- 补全菜单最大高度
-opt.pumheight = 12
+opt.pumheight = 9
 
 -- 补全菜单透明度
 opt.pumblend = 12
