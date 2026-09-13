@@ -14,7 +14,7 @@
 | 语法 | nvim-treesitter |
 | 格式化 | stylua（Lua）、oxfmt（JS/TS/Vue）、LSP format（其他） |
 | 导航 | flash.nvim、which-key.nvim |
-| UI | snacks.nvim、mini.icons、nvim-web-devicons |
+| UI | snacks.nvim、noice.nvim（+ nui.nvim）、mini.icons、nvim-web-devicons |
 | Git | gitsigns.nvim |
 
 ## 🛠 依赖
