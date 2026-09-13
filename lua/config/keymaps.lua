@@ -148,15 +148,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
   callback = function(ev)
     -- <leader>c 操作类
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code Action" })
-    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
-    vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { buffer = ev.buf, desc = "Run CodeLens" })
+    map("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code Action" })
+    map("n", "<leader>cr", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
+    map("n", "<leader>cl", vim.lsp.codelens.run, { buffer = ev.buf, desc = "Run CodeLens" })
     -- <leader>g 跳转类
-    vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Definition" })
-    vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Declaration" })
-    vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition, { buffer = ev.buf, desc = "Type Definition" })
-    vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { buffer = ev.buf, desc = "Implementation" })
-    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = ev.buf, desc = "References" })
+    map("n", "<leader>gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Definition" })
+    map("n", "<leader>gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Declaration" })
+    map("n", "<leader>gt", vim.lsp.buf.type_definition, { buffer = ev.buf, desc = "Type Definition" })
+    map("n", "<leader>gi", vim.lsp.buf.implementation, { buffer = ev.buf, desc = "Implementation" })
+    map("n", "<leader>gr", vim.lsp.buf.references, { buffer = ev.buf, desc = "References" })
   end,
 })
 
