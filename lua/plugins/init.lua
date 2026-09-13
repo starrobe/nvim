@@ -131,6 +131,7 @@ require("snacks").setup({
 })
 Snacks.toggle.inlay_hints():map("<leader>uh")
 Snacks.toggle.indent():map("<leader>ug")
+Snacks.toggle.diagnostics():map("<leader>ud")
 
 -- nvim-treesitter
 local ensure_installed = {
