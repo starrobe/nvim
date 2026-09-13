@@ -69,11 +69,15 @@ git clone <your-repo-url> ~/.config/nvim
 │   ├── config/
 │   │   ├── init.lua      # 组合入口 + 诊断配置
 │   │   ├── options.lua   # 编辑器选项
-│   │   └── keymaps.lua   # 按键映射
+│   │   ├── keymaps.lua   # 按键映射
+│   │   └── format.lua    # 格式化（按文件类型分发 formatter）
 │   └── plugins/
 │       └── init.lua      # 插件声明与配置
-├── after/lsp/            # 各 LSP server 独立配置
-│   ├── clangd.lua
-│   └── lua_ls.lua
+├── after/
+│   ├── ftplugin/
+│   │   └── lua.lua       # Lua 文件缩进设置（2 空格）
+│   └── lsp/              # 各 LSP server 独立配置
+│       ├── clangd.lua
+│       └── lua_ls.lua
 └── nvim-pack-lock.json   # 插件版本锁定
 ```
