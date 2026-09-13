@@ -133,6 +133,16 @@ require("snacks").setup({
 Snacks.toggle.inlay_hints():map("<leader>uh")
 Snacks.toggle.indent():map("<leader>ug")
 Snacks.toggle.diagnostics():map("<leader>ud")
+Snacks.toggle.new({
+  id = "git_blame",
+  name = "Git Blame",
+  get = function()
+    return require("gitsigns.config").config.current_line_blame
+  end,
+  set = function(state)
+    require("gitsigns").toggle_current_line_blame(state)
+  end,
+}):map("<leader>ub")
 
 -- nvim-treesitter
 local ensure_installed = {
