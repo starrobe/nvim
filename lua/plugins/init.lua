@@ -83,6 +83,7 @@ wk.add({
     { "<leader>b", group = "buffer" },
     { "<leader>c", group = "code" },
     { "<leader>f", group = "find" },
+    { "<leader>g", group = "goto" },
     { "<leader>s", group = "search" },
     { "<leader>u", group = "ui" },
     { "<leader>w", group = "windows" },

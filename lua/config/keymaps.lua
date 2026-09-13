@@ -138,15 +138,27 @@ map(
 )
 
 -- lsp
--- vim.api.nvim_create_autocmd("LspAttach", {
---   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
---   callback = function(ev)
---     vim.keymap.set("n", "<leader>ch", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature Help" })
---     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover" })
---     vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
---     vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code Action" })
---   end,
--- })
+-- 移除 Neovim 默认的 gr* 映射（已迁移到 <leader>c / <leader>g）
+for _, key in ipairs({ "grn", "gra", "grx", "grr", "gri", "grt" }) do
+  pcall(vim.keymap.del, "n", key)
+  pcall(vim.keymap.del, "x", key)
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
+  callback = function(ev)
+    -- <leader>c 操作类
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code Action" })
+    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
+    vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { buffer = ev.buf, desc = "Run CodeLens" })
+    -- <leader>g 跳转类
+    vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Definition" })
+    vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Declaration" })
+    vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition, { buffer = ev.buf, desc = "Type Definition" })
+    vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { buffer = ev.buf, desc = "Implementation" })
+    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = ev.buf, desc = "References" })
+  end,
+})
 
 -- vim.keymap.set({ "n", "i", "s" }, "<c-f>", function()
 --   if not require("noice.lsp").scroll(4) then
