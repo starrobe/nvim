@@ -10,17 +10,17 @@
 |------|------|
 | 主题 | tokyonight.nvim、gruvbox.nvim |
 | 补全 | 原生 `vim.lsp.completion`（内置） |
-| LSP | nvim-lspconfig（lua_ls / clangd / ty / ruff / ts_ls / marksman） |
+| LSP | nvim-lspconfig |
 | 语法 | nvim-treesitter |
-| 格式化 | stylua（Lua）、oxfmt（JS/TS/Vue）、LSP format（其他） |
 | 导航 | flash.nvim、which-key.nvim |
-| UI | snacks.nvim、noice.nvim（+ nui.nvim）、mini.icons、nvim-web-devicons |
+| UI | snacks.nvim、mini.icons、nvim-web-devicons |
 | Git | gitsigns.nvim |
 
 ## 🛠 依赖
 
 - **Neovim** ≥ 0.11（依赖内置 `vim.pack`）
-- 系统工具：`clangd`、`ruff`、`stylua`、`oxfmt`、`typescript-language-server`（按需）
+- **LSP 服务器**：`lua_ls`、`clangd`、`ty`、`ruff`、`ts_ls`、`marksman`
+- **格式化工具**：`stylua`（Lua）、`oxfmt`（JS/TS/Vue），其余语言走 LSP format
 
 ## 📥 安装
 
@@ -54,10 +54,12 @@ git clone <your-repo-url> ~/.config/nvim
 | `s` / `S` / `R` | flash 跳转（普通 / Treesitter / 搜索） |
 | `<leader>cf` | 格式化代码 |
 | `<leader><space>` | 查找文件 |
-| `<leader>fb` | 查找 Buffer |
-| `<leader>sg` / `<leader>sw` | Grep / 搜索光标词 |
+| `<leader>sb` | 查找 Buffer |
+| `<leader>ss` / `<leader>sw` | Grep / 搜索光标词 |
 | `<leader>sh` / `<leader>sd` | 帮助 / 诊断列表 |
 | `<leader>sn` | 通知历史 |
+| `<leader>uh` / `<leader>ui` / `<leader>ud` | 内联提示 / 缩进线 / 诊断 开关 |
+| `<leader>ub` | Git Blame 开关 |
 | `[[` / `]]` | 上一个 / 下一个引用 |
 
 ## 📁 目录结构
