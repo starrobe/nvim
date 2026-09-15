@@ -86,7 +86,7 @@ wk.add({
     { "[", group = "previous" },
     { "<leader>b", group = "buffer" },
     { "<leader>c", group = "code" },
-    { "<leader>f", group = "find" },
+    -- { "<leader>f", group = "find" },
     { "<leader>g", group = "goto" },
     { "<leader>s", group = "search" },
     { "<leader>u", group = "ui" },
