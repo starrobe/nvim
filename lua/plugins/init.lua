@@ -145,7 +145,7 @@ require("snacks").setup({
   words = { enabled = true },
 })
 Snacks.toggle.inlay_hints():map("<leader>uh")
-Snacks.toggle.indent():map("<leader>ug")
+Snacks.toggle.indent():map("<leader>ui")
 Snacks.toggle.diagnostics():map("<leader>ud")
 Snacks.toggle
   .new({
