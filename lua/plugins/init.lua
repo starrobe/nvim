@@ -74,6 +74,10 @@ wk.setup({
     -- 禁用所有mapping icons
     mappings = false,
   },
+  win = {
+    border = "none",
+    padding = { 1, 2 },
+  },
 })
 wk.add({
   {
