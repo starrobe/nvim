@@ -11,8 +11,10 @@ local M = {}
 --- 应用颜色覆盖（需在 colorscheme 之后调用）
 function M.apply()
   -- 提示符颜色（hit-enter / more-prompt）—— tokyonight-storm 的 purple
-  vim.api.nvim_set_hl(0, "Question", { fg = "#9d7cd8" })
-  vim.api.nvim_set_hl(0, "MoreMsg", { fg = "#9d7cd8" })
+  -- vim.api.nvim_set_hl(0, "Question", { fg = "#9d7cd8" })
+  -- vim.api.nvim_set_hl(0, "MoreMsg", { fg = "#9d7cd8" })
+  vim.api.nvim_set_hl(0, "Question", {})
+  vim.api.nvim_set_hl(0, "MoreMsg", {})
 
   -- gitsigns 符号颜色 —— tokyonight-storm 的 git.add / change / delete
   vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#449dab" })
