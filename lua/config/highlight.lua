@@ -14,7 +14,7 @@
 
 local M = {}
 
-local enabled = true -- 当前状态，默认开启语法高亮
+local enabled = false -- 当前状态，默认关闭语法高亮
 
 -- 传统正则语法高亮使用的标准 group（见 :h group-name）
 local std_syntax_groups = {
@@ -101,6 +101,17 @@ end
 --- @return boolean 当前是否开启语法高亮
 function M.is_enabled()
   return enabled
+end
+
+--- 应用当前状态（启动时调用，无条件应用，绕过 set_enabled 的幂等检查）
+function M.apply()
+  if enabled then
+    vim.lsp.semantic_tokens.enable(true)
+    restore_syntax_groups()
+  else
+    vim.lsp.semantic_tokens.enable(false)
+    clear_syntax_groups()
+  end
 end
 
 return M

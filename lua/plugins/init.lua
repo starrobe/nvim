@@ -20,6 +20,10 @@ vim.pack.add({
 vim.cmd.colorscheme("tokyonight-storm")
 -- vim.cmd.packadd("nvim.undotree")
 
+-- 默认状态：关闭语法高亮 + 透明背景（可用 <leader>us / <leader>ut 切换）
+require("config.highlight").apply()
+require("config.transparent").apply()
+
 vim.api.nvim_create_user_command("DiffOrig", function()
   -- 获取当前缓冲区的文件名（确保已存盘）
   local filename = vim.api.nvim_buf_get_name(0)

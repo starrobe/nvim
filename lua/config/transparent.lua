@@ -11,7 +11,7 @@
 
 local M = {}
 
-local enabled = false -- 默认不透明，保持 colorscheme 原有背景
+local enabled = true -- 默认透明背景（透出终端背景）
 
 -- 编辑器背景相关 group（对应 tokyonight 的 transparent 选项所处理的 group）
 local bg_groups = {
@@ -76,6 +76,15 @@ end
 --- @return boolean 当前是否开启透明背景
 function M.is_enabled()
   return enabled
+end
+
+--- 应用当前状态（启动时调用，无条件应用，绕过 set_enabled 的幂等检查）
+function M.apply()
+  if enabled then
+    clear_bg()
+  else
+    restore_bg()
+  end
 end
 
 return M
