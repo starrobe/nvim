@@ -2,7 +2,7 @@
 
 个人使用的Neovim 配置。
 
-![screenshot](https://img.starrobe.cn/screenshot/nvim.png)
+![screenshot](https://img.starrobe.cn/screenshot/nvim-neutral.png)
 
 ## 📦 插件
 
