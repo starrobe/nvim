@@ -76,7 +76,8 @@ git clone <your-repo-url> ~/.config/nvim
 │   │   ├── keymaps.lua   # 按键映射
 │   │   ├── format.lua    # 格式化（按文件类型分发 formatter）
 │   │   ├── highlight.lua # 语法高亮开关（syntax off/on）
-│   │   └── transparent.lua # 透明背景开关
+│   │   ├── transparent.lua # 透明背景开关
+│   │   └── colors.lua    # 未启用 colorscheme 时补充的部分颜色
 │   └── plugins/
 │       └── init.lua      # 插件声明与配置
 ├── after/

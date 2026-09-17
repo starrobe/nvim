@@ -17,12 +17,15 @@ vim.pack.add({
   -- gh("folke/noice.nvim"),
 })
 
-vim.cmd.colorscheme("tokyonight-storm")
+-- vim.cmd.colorscheme("tokyonight-storm")
 -- vim.cmd.packadd("nvim.undotree")
 
 -- 默认状态：关闭语法高亮 + 透明背景（可用 <leader>us / <leader>ut 切换）
 require("config.highlight").apply()
 require("config.transparent").apply()
+
+-- 未启用 colorscheme 时，补上 tokyonight-storm 的部分颜色（见 config/colors.lua）
+require("config.colors").apply()
 
 vim.api.nvim_create_user_command("DiffOrig", function()
   -- 获取当前缓冲区的文件名（确保已存盘）
