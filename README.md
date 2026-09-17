@@ -61,6 +61,7 @@ git clone <your-repo-url> ~/.config/nvim
 | `<leader>uh` / `<leader>ui` / `<leader>ud` | 内联提示 / 缩进线 / 诊断 开关 |
 | `<leader>ub` | Git Blame 开关 |
 | `<leader>us` | 语法高亮 开关（`syntax off`/`on`） |
+| `<leader>ut` | 透明背景 开关 |
 | `[[` / `]]` | 上一个 / 下一个引用 |
 
 ## 📁 目录结构
@@ -74,7 +75,8 @@ git clone <your-repo-url> ~/.config/nvim
 │   │   ├── options.lua   # 编辑器选项
 │   │   ├── keymaps.lua   # 按键映射
 │   │   ├── format.lua    # 格式化（按文件类型分发 formatter）
-│   │   └── highlight.lua # 语法高亮开关（syntax off/on）
+│   │   ├── highlight.lua # 语法高亮开关（syntax off/on）
+│   │   └── transparent.lua # 透明背景开关
 │   └── plugins/
 │       └── init.lua      # 插件声明与配置
 ├── after/

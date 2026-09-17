@@ -171,6 +171,18 @@ Snacks.toggle
     end,
   })
   :map("<leader>us")
+Snacks.toggle
+  .new({
+    id = "transparent",
+    name = "Transparent Background",
+    get = function()
+      return require("config.transparent").is_enabled()
+    end,
+    set = function(state)
+      require("config.transparent").set_enabled(state)
+    end,
+  })
+  :map("<leader>ut")
 
 -- nvim-treesitter
 local ensure_installed = {

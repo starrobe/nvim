@@ -70,6 +70,10 @@ end
 local function restore_syntax_groups()
   if vim.g.colors_name and vim.g.colors_name ~= "" then
     vim.cmd.colorscheme(vim.g.colors_name)
+    -- 重载 colorscheme 会一并恢复背景色，透明背景若已开启需重新应用
+    pcall(function()
+      require("config.transparent").reapply()
+    end)
   end
 end
 
