@@ -159,6 +159,18 @@ Snacks.toggle
     end,
   })
   :map("<leader>ub")
+Snacks.toggle
+  .new({
+    id = "syntax_highlight",
+    name = "Syntax Highlight",
+    get = function()
+      return require("config.highlight").is_enabled()
+    end,
+    set = function(state)
+      require("config.highlight").set_enabled(state)
+    end,
+  })
+  :map("<leader>us")
 
 -- nvim-treesitter
 local ensure_installed = {
