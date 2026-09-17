@@ -8,13 +8,23 @@
 
 | 类别 | 插件 |
 |------|------|
-| 主题 | tokyonight.nvim、gruvbox.nvim |
+| 主题 | tokyonight.nvim、gruvbox.nvim（默认不启用） |
 | 补全 | 原生 `vim.lsp.completion`（内置） |
 | LSP | nvim-lspconfig |
 | 语法 | nvim-treesitter |
 | 导航 | flash.nvim、which-key.nvim |
 | UI | snacks.nvim、mini.icons、nvim-web-devicons |
 | Git | gitsigns.nvim |
+
+## 🎨 外观
+
+默认采用「素净」风格：**关闭语法高亮**、**背景透明**、**不使用 colorscheme**（Neovim 默认配色），
+仅在 `lua/config/colors.lua` 手动补充了少量颜色（gitsigns 符号等）。
+
+- `<leader>us` — 切换语法高亮（默认关）
+- `<leader>ut` — 切换透明背景（默认开）
+
+如需启用主题，取消 `lua/plugins/init.lua` 中 `colorscheme` 一行的注释即可。
 
 ## 🛠 依赖
 
