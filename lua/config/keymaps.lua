@@ -95,6 +95,9 @@ end, { desc = "Next Reference" })
 map("n", "[[", function()
   Snacks.words.jump(-vim.v.count1)
 end, { desc = "Pre Reference" })
+map("n", "<leader>uB", function()
+  Snacks.git.blame_line()
+end, { desc = "Git Blame Line" })
 
 -- 补全（原生 LSP completion）
 -- <C-Space> 在多数终端会被发送为 NUL（<C-@>），两者都映射以确保能触发
