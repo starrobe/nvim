@@ -43,10 +43,10 @@ function M.apply()
     vim.api.nvim_set_hl(0, "FloatFooter", { bg = float_bg, update = true })
   end
 
-  -- gitsigns 符号颜色 —— tokyonight-storm 的 git.add / change / delete
-  vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#449dab" })
-  vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#6183bb" })
-  vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#914c54" })
+  -- gitsigns 符号颜色 —— 灰调但提高饱和度，拉开绿(Add)/蓝(Change) 的色相便于分辨
+  vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#6aa184" })
+  vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#7c8dc4" })
+  vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#9a8085" })
 end
 
 return M
