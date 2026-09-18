@@ -159,7 +159,9 @@ require("snacks").setup({
 
 -- 让 winblend 生效：snacks 检测到透明主题（Normal bg 为 nil）会强制 winblend=0，
 -- 这里禁用该检测，使 options.lua 里的全局 vim.opt.winblend 能作用于浮动窗口。
-require("snacks.util").is_transparent = function() return false end
+require("snacks.util").is_transparent = function()
+  return false
+end
 
 Snacks.toggle.inlay_hints():map("<leader>uh")
 Snacks.toggle.indent():map("<leader>ui")
