@@ -104,6 +104,11 @@ wk.add({
 -- lsp
 vim.lsp.enable({ "lua_ls", "clangd", "ty", "ruff", "ts_ls", "marksman" })
 
+-- lua_ls 补全函数时发 VS Code 命令 editor.action.triggerParameterHints，映射到签名帮助
+vim.lsp.commands["editor.action.triggerParameterHints"] = function()
+  vim.lsp.buf.signature_help()
+end
+
 -- 原生 LSP 补全（自动触发）
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
