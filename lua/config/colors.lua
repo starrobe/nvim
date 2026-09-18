@@ -5,7 +5,6 @@
 -- config/highlight.lua（syntax off）无关。颜色值取自 tokyonight-storm 调色板。
 -- 若之后重新启用 colorscheme，这些覆盖可删除（tokyonight 会自己定义它们）。
 -- =============================================================================
-
 local M = {}
 
 --- 应用颜色覆盖（需在 colorscheme 之后调用）
@@ -47,6 +46,21 @@ function M.apply()
   vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#6aa184" })
   vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#7c8dc4" })
   vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#9a8085" })
+
+  -- 诊断颜色 —— 与 gitsigns 同款灰调：去饱和以贴合「素净」，按严重度区分色相。
+  -- 基座 DiagnosticXxx 的 fg 由 virtual text / float 的 default link 继承；
+  -- 下划线 squiggle 颜色由 DiagnosticUnderlineXxx 的 sp 控制（update 保留 underline）。
+  local diag_colors = {
+    { "Error", "#a06b75" }, -- 玫瑰红
+    { "Warn",  "#a38f63" }, -- 灰琥珀
+    { "Info",  "#6b94a0" }, -- 灰青
+    { "Hint",  "#7c8dc4" }, -- 灰蓝（同 GitSignsChange）
+    { "Ok",    "#6aa184" }, -- 灰绿（同 GitSignsAdd）
+  }
+  for _, d in ipairs(diag_colors) do
+    vim.api.nvim_set_hl(0, "Diagnostic" .. d[1], { fg = d[2] })
+    vim.api.nvim_set_hl(0, "DiagnosticUnderline" .. d[1], { sp = d[2], update = true })
+  end
 end
 
 return M
