@@ -83,9 +83,9 @@ opt.completeopt = "menu,menuone,noselect,popup"
 opt.pumheight = 9
 
 -- 补全菜单透明度
-opt.pumblend = 12
+opt.pumblend = 30
 --浮动窗口透明度
-opt.winblend = 12
+opt.winblend = 30
 
 -- =============================================================================
 -- 窗口和分屏
