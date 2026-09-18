@@ -16,6 +16,15 @@ function M.apply()
   -- 模式显示（showmode 的 -- INSERT -- / -- NORMAL -- 等）—— 清为默认色
   vim.api.nvim_set_hl(0, "ModeMsg", {})
 
+  -- 错误/警告信息（E37 等）—— 灰调，与诊断色 Error/Warn 保持一致
+  vim.api.nvim_set_hl(0, "ErrorMsg", { fg = "#a06b75" })
+  vim.api.nvim_set_hl(0, "WarningMsg", { fg = "#a38f63" })
+
+  -- 搜索当前匹配（默认亮黄 bg）/ 不可见字符（默认亮青）—— 改为与选区一致的灰调
+  vim.api.nvim_set_hl(0, "IncSearch", { bg = "#4f5258" })
+  vim.api.nvim_set_hl(0, "CurSearch", { bg = "#4f5258" })
+  vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#4f5258" })
+
   -- 补全菜单：去掉匹配字串的加粗高亮（link 到 Pmenu/PmenuSel）
   vim.api.nvim_set_hl(0, "PmenuMatch", { link = "Pmenu" })
   vim.api.nvim_set_hl(0, "PmenuMatchSel", { link = "PmenuSel" })
@@ -60,6 +69,20 @@ function M.apply()
   for _, d in ipairs(diag_colors) do
     vim.api.nvim_set_hl(0, "Diagnostic" .. d[1], { fg = d[2] })
     vim.api.nvim_set_hl(0, "DiagnosticUnderline" .. d[1], { sp = d[2], update = true })
+  end
+
+  -- diff / 目录 / 拼写 —— 去饱和，与错误/诊断色保持一致
+  vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#a06b75" })
+  vim.api.nvim_set_hl(0, "Directory", { fg = "#7c8dc4" })
+  vim.api.nvim_set_hl(0, "QuickFixLine", { bg = "#2c2e33" })
+  local spell_colors = {
+    { "Bad",   "#a06b75" }, -- 拼错 → 玫瑰红
+    { "Cap",   "#a38f63" }, -- 应大写 → 灰琥珀
+    { "Rare",  "#6b94a0" }, -- 生僻词 → 灰青
+    { "Local", "#6aa184" }, -- 其它区域拼写 → 灰绿
+  }
+  for _, s in ipairs(spell_colors) do
+    vim.api.nvim_set_hl(0, "Spell" .. s[1], { sp = s[2], update = true })
   end
 end
 
