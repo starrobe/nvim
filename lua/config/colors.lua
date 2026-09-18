@@ -17,6 +17,10 @@ function M.apply()
   -- 模式显示（showmode 的 -- INSERT -- / -- NORMAL -- 等）—— 清为默认色
   vim.api.nvim_set_hl(0, "ModeMsg", {})
 
+  -- 补全菜单：去掉匹配字串的加粗高亮（link 到 Pmenu/PmenuSel）
+  vim.api.nvim_set_hl(0, "PmenuMatch", { link = "Pmenu" })
+  vim.api.nvim_set_hl(0, "PmenuMatchSel", { link = "PmenuSel" })
+
   -- snacks notifier 消息高亮：正文/标题/页脚/边框保留不透明背景（link 到 NormalFloat），
   -- 仅取消诊断色；图标（compact 样式未使用）link 到无颜色 group。
   -- notifier 在首次通知时会用 default link 重新挂上这些 group，所以这里用非默认 link。
