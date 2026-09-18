@@ -17,21 +17,26 @@ function M.apply()
   -- 模式显示（showmode 的 -- INSERT -- / -- NORMAL -- 等）—— 清为默认色
   vim.api.nvim_set_hl(0, "ModeMsg", {})
 
-  -- snacks notifier 消息高亮：全部取消（正文/图标/边框/标题/页脚/历史），改为无颜色。
-  -- notifier 在首次通知时会用 default link 重新挂上这些 group；空定义会被 default
-  -- 覆盖，因此统一 link 到一个无颜色的空 group，保持无颜色。
+  -- snacks notifier 消息高亮：正文/标题/页脚/边框保留不透明背景（link 到 NormalFloat），
+  -- 仅取消诊断色；图标（compact 样式未使用）link 到无颜色 group。
+  -- notifier 在首次通知时会用 default link 重新挂上这些 group，所以这里用非默认 link。
   vim.api.nvim_set_hl(0, "SnacksNotifierPlain", {})
-  for _, part in ipairs({ "", "Icon", "Border", "Title", "Footer" }) do
-    for _, level in ipairs({ "Error", "Warn", "Info", "Debug", "Trace" }) do
-      vim.api.nvim_set_hl(0, "SnacksNotifier" .. part .. level, { link = "SnacksNotifierPlain" })
+  for _, level in ipairs({ "Error", "Warn", "Info", "Debug", "Trace" }) do
+    for _, part in ipairs({ "", "Title", "Footer", "Border" }) do
+      vim.api.nvim_set_hl(0, "SnacksNotifier" .. part .. level, { link = "NormalFloat" })
     end
+    vim.api.nvim_set_hl(0, "SnacksNotifierIcon" .. level, { link = "SnacksNotifierPlain" })
   end
-  for _, group in ipairs({
-    "SnacksNotifierHistory",
-    "SnacksNotifierHistoryTitle",
-    "SnacksNotifierHistoryDateTime",
-  }) do
-    vim.api.nvim_set_hl(0, group, { link = "SnacksNotifierPlain" })
+  -- 通知历史窗口：正文不透明背景，标题/时间取消颜色
+  vim.api.nvim_set_hl(0, "SnacksNotifierHistory", { link = "NormalFloat" })
+  vim.api.nvim_set_hl(0, "SnacksNotifierHistoryTitle", { link = "SnacksNotifierPlain" })
+  vim.api.nvim_set_hl(0, "SnacksNotifierHistoryDateTime", { link = "SnacksNotifierPlain" })
+
+  -- 浮动窗口标题/页脚背景：默认 bg 为 nil（透明），设为 NormalFloat 的背景使其不透明
+  local float_bg = vim.api.nvim_get_hl(0, { name = "NormalFloat", link = false }).bg
+  if float_bg then
+    vim.api.nvim_set_hl(0, "FloatTitle", { bg = float_bg, update = true })
+    vim.api.nvim_set_hl(0, "FloatFooter", { bg = float_bg, update = true })
   end
 
   -- gitsigns 符号颜色 —— tokyonight-storm 的 git.add / change / delete

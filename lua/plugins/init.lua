@@ -145,6 +145,11 @@ require("snacks").setup({
     },
   },
   notifier = { enabled = true },
+  styles = {
+    blame_line = { border = "vpad" },
+    notification = { border = "vpad" },
+    notification_history = { border = "vpad" },
+  },
   quickfile = { enabled = true },
   scope = { enabled = true },
   scroll = { enabled = true },
