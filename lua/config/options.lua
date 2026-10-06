@@ -127,9 +127,6 @@ vim.api.nvim_create_autocmd("UIEnter", {
 
 -- 持久化撤销历史
 opt.undofile = true
-local undo_dir = vim.fn.stdpath("state") .. "/undo"
-opt.undodir = undo_dir
-vim.fn.mkdir(undo_dir, "p")
 
 -- =============================================================================
 -- 交换与备份
