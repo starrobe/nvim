@@ -134,9 +134,8 @@ opt.undofile = true
 
 -- 关闭 swap 文件
 opt.swapfile = false
--- 关闭备份文件（含写入时的临时备份）
+-- 关闭备份文件
 opt.backup = false
-opt.writebackup = false
 
 -- =============================================================================
 -- 其他配置
