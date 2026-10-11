@@ -34,6 +34,7 @@ function M.apply()
   -- 搜索当前匹配（默认亮黄 bg）/ 不可见字符（默认亮青）—— 改为与选区一致的灰调
   vim.api.nvim_set_hl(0, "IncSearch", { bg = c.gray })
   vim.api.nvim_set_hl(0, "CurSearch", { bg = c.gray })
+  vim.api.nvim_set_hl(0, "Search", { bg = c.gray }) -- Substitute link 到 Search，一并变灰
   vim.api.nvim_set_hl(0, "SpecialKey", { fg = c.gray })
 
   -- 补全菜单：去掉匹配字串的加粗高亮（link 到 Pmenu/PmenuSel）
@@ -83,6 +84,8 @@ function M.apply()
   end
 
   -- diff / 目录 / 拼写 —— 去饱和，与错误/诊断色保持一致
+  vim.api.nvim_set_hl(0, "DiffAdd", { bg = c.gray })
+  vim.api.nvim_set_hl(0, "DiffText", { bg = c.gray }) -- DiffTextAdd link 到 DiffText
   vim.api.nvim_set_hl(0, "DiffDelete", { fg = c.rose })
   vim.api.nvim_set_hl(0, "Directory", { fg = c.blue })
   vim.api.nvim_set_hl(0, "QuickFixLine", { bg = c.panel })
