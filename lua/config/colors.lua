@@ -1,10 +1,9 @@
 -- =============================================================================
 -- 这里只覆盖 UI 提示与 gitsigns 符号等「非语法高亮」的 group，与
--- config/highlight.lua（syntax off）无关。颜色值取自 tokyonight-storm 调色板。
--- 若之后重新启用 colorscheme，这些覆盖可删除（tokyonight 会自己定义它们）。
+-- config/highlight.lua（syntax off）无关。
 -- =============================================================================
 
--- 调色板：tokyonight-storm 灰调化后的常用色（集中管理，改动只改这里）
+-- 调色板
 local c = {
   rose = "#a06b75", -- 错误 / diff 删除 / 拼错
   amber = "#a38f63", -- 警告 / 应大写
@@ -68,7 +67,7 @@ function M.apply()
   vim.api.nvim_set_hl(0, "GitSignsChange", { fg = c.blue })
   vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = c.rose_gray })
 
-  -- 诊断颜色 —— 与 gitsigns 同款灰调：去饱和以贴合「素净」，按严重度区分色相。
+  -- 诊断颜色 —— 与 gitsigns 同款灰调
   -- 基座 DiagnosticXxx 的 fg 由 virtual text / float 的 default link 继承；
   -- 下划线 squiggle 颜色由 DiagnosticUnderlineXxx 的 sp 控制（update 保留 underline）。
   local diag_colors = {
