@@ -1,10 +1,21 @@
 -- =============================================================================
--- 未启用 colorscheme 时，手动补充 tokyonight-storm 的若干颜色
---
 -- 这里只覆盖 UI 提示与 gitsigns 符号等「非语法高亮」的 group，与
 -- config/highlight.lua（syntax off）无关。颜色值取自 tokyonight-storm 调色板。
 -- 若之后重新启用 colorscheme，这些覆盖可删除（tokyonight 会自己定义它们）。
 -- =============================================================================
+
+-- 调色板：tokyonight-storm 灰调化后的常用色（集中管理，改动只改这里）
+local c = {
+  rose = "#a06b75", -- 错误 / diff 删除 / 拼错
+  amber = "#a38f63", -- 警告 / 应大写
+  teal = "#6b94a0", -- 信息 / 生僻词
+  blue = "#7c8dc4", -- 提示 / change / 目录
+  green = "#6aa184", -- ok / add / 本地拼写
+  rose_gray = "#9a8085", -- gitsigns 删除符号（更灰的玫瑰）
+  gray = "#4f5258", -- 选区 / 搜索 / 不可见字符
+  panel = "#2c2e33", -- 淡背景（quickfix 当前行）
+}
+
 local M = {}
 
 --- 应用颜色覆盖（需在 colorscheme 之后调用）
@@ -17,13 +28,13 @@ function M.apply()
   vim.api.nvim_set_hl(0, "ModeMsg", {})
 
   -- 错误/警告信息（E37 等）—— 灰调，与诊断色 Error/Warn 保持一致
-  vim.api.nvim_set_hl(0, "ErrorMsg", { fg = "#a06b75" })
-  vim.api.nvim_set_hl(0, "WarningMsg", { fg = "#a38f63" })
+  vim.api.nvim_set_hl(0, "ErrorMsg", { fg = c.rose })
+  vim.api.nvim_set_hl(0, "WarningMsg", { fg = c.amber })
 
   -- 搜索当前匹配（默认亮黄 bg）/ 不可见字符（默认亮青）—— 改为与选区一致的灰调
-  vim.api.nvim_set_hl(0, "IncSearch", { bg = "#4f5258" })
-  vim.api.nvim_set_hl(0, "CurSearch", { bg = "#4f5258" })
-  vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#4f5258" })
+  vim.api.nvim_set_hl(0, "IncSearch", { bg = c.gray })
+  vim.api.nvim_set_hl(0, "CurSearch", { bg = c.gray })
+  vim.api.nvim_set_hl(0, "SpecialKey", { fg = c.gray })
 
   -- 补全菜单：去掉匹配字串的加粗高亮（link 到 Pmenu/PmenuSel）
   vim.api.nvim_set_hl(0, "PmenuMatch", { link = "Pmenu" })
@@ -52,19 +63,19 @@ function M.apply()
   end
 
   -- gitsigns 符号颜色 —— 灰调但提高饱和度，拉开绿(Add)/蓝(Change) 的色相便于分辨
-  vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#6aa184" })
-  vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#7c8dc4" })
-  vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#9a8085" })
+  vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = c.green })
+  vim.api.nvim_set_hl(0, "GitSignsChange", { fg = c.blue })
+  vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = c.rose_gray })
 
   -- 诊断颜色 —— 与 gitsigns 同款灰调：去饱和以贴合「素净」，按严重度区分色相。
   -- 基座 DiagnosticXxx 的 fg 由 virtual text / float 的 default link 继承；
   -- 下划线 squiggle 颜色由 DiagnosticUnderlineXxx 的 sp 控制（update 保留 underline）。
   local diag_colors = {
-    { "Error", "#a06b75" }, -- 玫瑰红
-    { "Warn",  "#a38f63" }, -- 灰琥珀
-    { "Info",  "#6b94a0" }, -- 灰青
-    { "Hint",  "#7c8dc4" }, -- 灰蓝（同 GitSignsChange）
-    { "Ok",    "#6aa184" }, -- 灰绿（同 GitSignsAdd）
+    { "Error", c.rose }, -- 玫瑰红
+    { "Warn", c.amber }, -- 灰琥珀
+    { "Info", c.teal }, -- 灰青
+    { "Hint", c.blue }, -- 灰蓝（同 GitSignsChange）
+    { "Ok", c.green }, -- 灰绿（同 GitSignsAdd）
   }
   for _, d in ipairs(diag_colors) do
     vim.api.nvim_set_hl(0, "Diagnostic" .. d[1], { fg = d[2] })
@@ -72,14 +83,14 @@ function M.apply()
   end
 
   -- diff / 目录 / 拼写 —— 去饱和，与错误/诊断色保持一致
-  vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#a06b75" })
-  vim.api.nvim_set_hl(0, "Directory", { fg = "#7c8dc4" })
-  vim.api.nvim_set_hl(0, "QuickFixLine", { bg = "#2c2e33" })
+  vim.api.nvim_set_hl(0, "DiffDelete", { fg = c.rose })
+  vim.api.nvim_set_hl(0, "Directory", { fg = c.blue })
+  vim.api.nvim_set_hl(0, "QuickFixLine", { bg = c.panel })
   local spell_colors = {
-    { "Bad",   "#a06b75" }, -- 拼错 → 玫瑰红
-    { "Cap",   "#a38f63" }, -- 应大写 → 灰琥珀
-    { "Rare",  "#6b94a0" }, -- 生僻词 → 灰青
-    { "Local", "#6aa184" }, -- 其它区域拼写 → 灰绿
+    { "Bad", c.rose }, -- 拼错 → 玫瑰红
+    { "Cap", c.amber }, -- 应大写 → 灰琥珀
+    { "Rare", c.teal }, -- 生僻词 → 灰青
+    { "Local", c.green }, -- 其它区域拼写 → 灰绿
   }
   for _, s in ipairs(spell_colors) do
     vim.api.nvim_set_hl(0, "Spell" .. s[1], { sp = s[2], update = true })
